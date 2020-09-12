@@ -55,8 +55,8 @@
             </a>
           </div>
         </div>
-        <Grid></Grid>
         <div id="clock"></div>
+        <Grid></Grid>
       </div>
     </div>
     <footer>
@@ -129,6 +129,10 @@ body {
   padding: 0;
   margin: 0;
   font-size: 20px;
+}
+ul, li {
+  list-style-type:none;
+  padding-left: 0;
 }
 #app {
   font-size: 14px;

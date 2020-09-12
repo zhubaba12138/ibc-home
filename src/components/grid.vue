@@ -1,6 +1,7 @@
 <template>
   <div class="grid">
-
+    <div class="title">数据面板</div>
+    <div class="chart" ref="chart"></div>
   </div>
 </template>
 
@@ -28,13 +29,6 @@ export default {
       divideUserCount: "-",
       divideCount: "-",
     };
-  },
-  watch: {
-    "tronweb.defaultAddress.hex"(n, o) {
-      if (o) {
-        this.login();
-      }
-    },
   },
   mounted() {
     const HttpProvider = TronWeb.providers.HttpProvider;
@@ -80,6 +74,9 @@ export default {
     if (document.body.offsetWidth > 745) {
       option.series[0].center = [300, 168];
     }
+    // 初始化
+    this.myChart = this.$echarts.init(this.$refs.chart);
+    this.myChart.setOption(option);
   },
   methods: {
     init() {
@@ -87,12 +84,9 @@ export default {
       this.getTransferRewardPoolAmount();
       this.getBurnRate();
       this.getTotalSupply();
-      // this.getInfo()
     },
     async login() {
-      // if (window.tronWeb.defaultAddress.hex) {
       // 实例化合约
-      // this.address = this.tronweb.defaultAddress.base58;
       await this.tronweb.setAddress("TRZesqGhsPczP2JycXxMhDRmprZzM9DWJQ");
       console.log(this.tronweb.isAddress("TRZesqGhsPczP2JycXxMhDRmprZzM9DWJQ"));
       try {
@@ -130,32 +124,36 @@ export default {
           (await this.contract.totalSupply().call()) /
           Math.pow(10, this.precision);
       this.otherToken = (this.total - this.totalSupply).toFixed(3)
-    },
 
-    getInfo() {
-      // this.$axios({
-      //   method: "get",
-      //   url: "/getInfo",
-      // }).then((res) => {
-      //   var data = res.data
-      //   // 持币地址数
-      //   this.tokenHolderCount = data.TokenHolderCount;
-      //   // 交易奖励交易额下限
-      //   this.transferRewardAmountLimit = data.TransferRewardAmountLimit;
-      //   // 持币分红持币额下限
-      //   this.divideRewardAmountLimit = data.DivideRewardAmountLimit;
-      //   // 当前分红预计收益
-      //   this.divideReward = data.DivideReward;
-      //   // 当前可参与分红地址数
-      //   this.divideUserCount = data.DivideUserCount;
-      //   // 分红次数
-      //   this.divideCount = data.DivideCount;
-      // });
+      this.myChart.setOption({
+        series: [
+          {
+            name: "token",
+            data: [
+              {
+                value: this.totalSupply,
+                name: '流通代币',
+                itemStyle: { color: "#0EC8FF" },
+              },
+              {
+                value: this.total - this.totalSupply,
+                name: '已销毁代币',
+                itemStyle: { color: "#E500FF" },
+              },
+            ],
+          },
+        ],
+      });
     },
   },
 }
 </script>
 
 <style scoped>
-
+  .grid {
+    padding-top: 4vw;
+  }
+  .grid .title {
+    font-size: 28px;
+  }
 </style>
