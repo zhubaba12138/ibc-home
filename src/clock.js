@@ -1,12 +1,15 @@
-
 export function CountdownTracker(label, value) {
+  let trans = { Days: "日", Hours: "时", Minutes: "分", Seconds: "秒" };
   var el = document.createElement("span");
 
   el.className = "flip-clock__piece";
   el.innerHTML =
     '<b class="flip-clock__card card"><b class="card__top"></b><b class="card__bottom"></b><b class="card__back"><b class="card__bottom"></b></b></b>' +
-    '<span class="flip-clock__slot">' +
+    '<span class="flip-clock__slot en">' +
     label +
+    "</span>" +
+    '<span class="flip-clock__slot cn">' +
+    trans[label] +
     "</span>";
 
   this.el = el;
