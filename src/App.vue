@@ -59,6 +59,7 @@
           </div>
         </div>
         <div id="clock"></div>
+        <Grid></Grid>
       </div>
     </div>
     <footer>
@@ -70,11 +71,15 @@
 
 <script>
 import { Clock } from "./clock.js";
+import Grid from "./components/grid";
 import axios from "axios";
 import moment from "moment";
 import "./clock.less";
 export default {
   name: "App",
+  components: {
+    Grid
+  },
   data() {
     return {
       titleFixed: false,
@@ -134,6 +139,10 @@ body {
   padding: 0;
   margin: 0;
   font-size: 20px;
+}
+ul, li {
+  list-style-type:none;
+  padding-left: 0;
 }
 #app {
   font-size: 14px;

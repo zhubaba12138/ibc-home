@@ -11,11 +11,13 @@
     "axios": "^0.20.0",
     "canvas-nest.js": "^2.0.4",
     "core-js": "^3.6.5",
+    "echarts": "^4.9.0",
     "moment": "^2.27.0",
     "svg-sprite-loader": "^5.0.0",
-    "vue": "^2.6.11",
     "vue-clipboard2": "^0.3.1",
-    "vue-toasted": "^1.1.28"
+    "vue-toasted": "^1.1.28",
+    "tronweb": "^3.0.0",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -40,7 +42,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-debugger": "off",
+      "no-console": "off"
+    }
   },
   "browserslist": [
     "> 1%",
