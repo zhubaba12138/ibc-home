@@ -105,7 +105,7 @@ body {
 }
 .contract {
   position: absolute;
-  right: 100px;
+  right: 1rem;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -141,6 +141,24 @@ body {
   color: #333;
   padding: 10px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+}
+@media screen and (max-width: 745px) {
+  .top .sticky {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    background: #fff;
+    z-index: 10;
+    color: #333;
+    padding: 10px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5);
+  }
+  .top .sticky svg {
+    color: rgb(102, 153, 255);
+    width: 3rem !important;
+    height: 3rem !important;
+  }
 }
 .top .sticky.isFixed svg {
   color: rgb(102, 153, 255);
