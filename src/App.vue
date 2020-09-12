@@ -36,7 +36,7 @@
                 : "The private placement of IBT tokens is underway!"
             }}
             <br />
-            {{ this.i18n === "cn" ? "私募地址：" : "address：" }}
+            {{ this.i18n === "cn" ? "私募地址：" : "Cryptocurrency wallet：" }}
             <span
               class="address"
               v-clipboard:copy="message"
@@ -46,9 +46,19 @@
             </span>
           </div>
           <div class="t2">
-            初始总量：100,000,000（交易燃烧会使代币总量持续减少）<br />
-            代币分配：无预挖、团队无持币，所有代币投入资金池<br />
-            私募价格：1TRX : 5IBT<br />
+            IBT Token 是基于区块链的新型社会实验型代币。 它基于 Tron
+            发行，在其智能合约中，除常规功能外，还内嵌了交易燃烧、尾单博
+            弈、持币分红,子母币四种独特机制。<br />
+            代币名称：IBT Token 代币符号：IBT<br />
+            初始总量：100,000,000（交易燃烧会使代币总量持续减少）
+            代币分配：无预挖、<br />
+            团队无持币，所有代币投入资金池<br />
+            代币类型：TRC-20<br />
+            上线交易所：JustSwap<br />
+            私募价格：1TRX：5IBT, 软顶:3000000TRX，硬顶:5000000TRX，私募资金
+            90%<br />
+            注入 AMM 交易所资金池，10%团队用于运营与开发。<br />
+            上线时间：2020 年 9 月 15 日 20:00<br />
           </div>
           <div class="r3">
             <a :href="`${publicPath}IBT_whitepaper_cn.pdf`" target="_blank">
@@ -58,8 +68,8 @@
             </a>
           </div>
         </div>
+        <span class="countdown">{{ this.i18n === "cn" ? "私募倒计时" : "Countdown" }}</span>
         <div id="clock"></div>
-        <Grid></Grid>
       </div>
     </div>
     <footer>
@@ -71,15 +81,11 @@
 
 <script>
 import { Clock } from "./clock.js";
-import Grid from "./components/grid";
 import axios from "axios";
 import moment from "moment";
 import "./clock.less";
 export default {
   name: "App",
-  components: {
-    Grid
-  },
   data() {
     return {
       titleFixed: false,
@@ -95,7 +101,7 @@ export default {
   methods: {
     onCopy() {
       this.$toasted
-        .show(this.i18n === "cn"?"复制成功！":"Copy successfully！", {
+        .show(this.i18n === "cn" ? "复制成功！" : "Copy successfully！", {
           className: "copy_success"
         })
         .goAway(1500);
@@ -140,8 +146,9 @@ body {
   margin: 0;
   font-size: 20px;
 }
-ul, li {
-  list-style-type:none;
+ul,
+li {
+  list-style-type: none;
   padding-left: 0;
 }
 #app {
@@ -266,17 +273,18 @@ ul, li {
   height: 1.5rem;
 }
 .top .t1 {
-  font-size: 3vw;
+  font-size: 2.5vw;
   font-weight: 500;
   position: relative;
   margin-bottom: 33px;
   /* padding: 0 3rem; */
 }
 .top .t2 {
-  font-size: 2.5vw;
+  font-size: 1.8vw;
   font-weight: 300;
   margin-bottom: 57px;
-  padding: 0 2rem;
+  padding: 0 20%;
+  text-align: left;
 }
 .top .r3 button {
   font-size: 22px;
@@ -343,5 +351,11 @@ footer .copyright {
 #app .address {
   cursor: pointer;
   text-decoration: underline;
+}
+.countdown {
+  font-size:20px;
+}
+.containaer {
+  margin-bottom:30px;
 }
 </style>
