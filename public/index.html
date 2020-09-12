@@ -1,15 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>IBC</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title>IBT</title>
+    <style type="text/css">
+      @media (max-width: 1920px) {
+        html {
+          font-size: 256px !important;
+        }
+      }
+
+      @media (max-width: 1842px) {
+        html {
+          font-size: 245.6px !important;
+        }
+      }
+
+      @media (max-width: 1762px) {
+        html {
+          font-size: 234.93px !important;
+        }
+      }
+
+      @media (max-width: 1682px) {
+        html {
+          font-size: 224.26px !important;
+        }
+      }
+
+      @media (max-width: 1602px) {
+        html {
+          font-size: 213.6px !important;
+        }
+      }
+
+      @media (max-width: 1522px) {
+        html {
+          font-size: 202.93px !important;
+        }
+      }
+
+      @media (max-width: 1442px) {
+        html {
+          font-size: 192.26px !important;
+        }
+      }
+
+      @media (max-width: 1362px) {
+        html {
+          font-size: 181.6px !important;
+        }
+      }
+
+      @media (max-width: 1282px) {
+        html {
+          font-size: 170.93px !important;
+        }
+      }
+
+      @media (max-width: 1202px) {
+        html {
+          font-size: 160.26px !important;
+        }
+      }
+
+      @media (max-width: 1122px) {
+        html {
+          font-size: 149.6px !important;
+        }
+      }
+
+      @media (max-width: 1042px) {
+        html {
+          font-size: 138.93px !important;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        html {
+          font-size: 136.53px !important;
+        }
+      }
+
+      @media (max-width: 962px) {
+        html {
+          font-size: 128.26px !important;
+        }
+      }
+
+      @media (max-width: 952px) {
+        html {
+          font-size: 126.93px !important;
+        }
+      }
+
+      @media (max-width: 902px) {
+        html {
+          font-size: 120.26px !important;
+        }
+      }
+
+      @media (max-width: 882px) {
+        html {
+          font-size: 117.6px !important;
+        }
+      }
+
+      @media (max-width: 828px) {
+        html {
+          font-size: 110.4px !important;
+        }
+      }
+
+      @media (max-width: 802px) {
+        html {
+          font-size: 106.93px !important;
+        }
+      }
+
+      @media (max-width: 775px) {
+        html {
+          font-size: 103.33px !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        html {
+          font-size: 102.4px !important;
+        }
+      }
+
+      @media (max-width: 750px) {
+        html {
+          font-size: 100px !important;
+        }
+      }
+
+      @media (max-width: 738px) {
+        html {
+          font-size: 98.4px !important;
+        }
+      }
+
+      @media (max-width: 734px) {
+        html {
+          font-size: 97.86px !important;
+        }
+      }
+
+      @media (max-width: 733px) {
+        html {
+          font-size: 97.73px !important;
+        }
+      }
+
+      @media (max-width: 669px) {
+        html {
+          font-size: 89.2px !important;
+        }
+      }
+
+      @media (max-width: 642px) {
+        html {
+          font-size: 85.6px !important;
+        }
+      }
+
+      @media (max-width: 602px) {
+        html {
+          font-size: 80.26px !important;
+        }
+      }
+
+      @media (max-width: 570px) {
+        html {
+          font-size: 76px !important;
+        }
+      }
+
+      @media (max-width: 535px) {
+        html {
+          font-size: 71.33px !important;
+        }
+      }
+
+      @media (max-width: 455px) {
+        html {
+          font-size: 60.66px !important;
+        }
+      }
+
+      @media (max-width: 437px) {
+        html {
+          font-size: 58.26px !important;
+        }
+      }
+
+      @media (max-width: 414px) {
+        html {
+          font-size: 55.2px !important;
+        }
+      }
+
+      @media (max-width: 412px) {
+        html {
+          font-size: 54.93px !important;
+        }
+      }
+
+      @media (max-width: 386px) {
+        html {
+          font-size: 51.46px !important;
+        }
+      }
+
+      @media (max-width: 375px) {
+        html {
+          font-size: 50px !important;
+        }
+      }
+
+      @media (max-width: 370.8px) {
+        html {
+          font-size: 49.44px !important;
+        }
+      }
+
+      @media (max-width: 360px) {
+        html {
+          font-size: 48px !important;
+        }
+      }
+
+      @media (max-width: 320px) {
+        html {
+          font-size: 42.66px !important;
+        }
+      }
+      @media screen and (orientation: landscape) {
+        html {
+          font-size: 50px !important;
+        }
+      }
+    </style>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong
+        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
+        properly without JavaScript enabled. Please enable it to
+        continue.</strong
+      >
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
