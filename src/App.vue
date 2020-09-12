@@ -36,16 +36,19 @@
                 : "The private placement of IBT tokens is underway!"
             }}
             <br />
-            {{
-              this.i18n === "cn"
-                ? "私募地址：ewrwer324234wewrwer"
-                : "address：ewrwer324234wewrwer"
-            }}
+            {{ this.i18n === "cn" ? "私募地址：" : "address：" }}
+            <span
+              class="address"
+              v-clipboard:copy="message"
+              v-clipboard:success="onCopy"
+            >
+              TSPUcs5X1wxGf7q9ni6TBtpA9ZyvKQyVga
+            </span>
           </div>
           <div class="t2">
             初始总量：100,000,000（交易燃烧会使代币总量持续减少）<br />
             代币分配：无预挖、团队无持币，所有代币投入资金池<br />
-            私募价格：1TRX；3IBT<br />
+            私募价格：1TRX : 3IBT<br />
           </div>
           <div class="r3">
             <a :href="`${publicPath}IBT_whitepaper_cn.pdf`" target="_blank">
@@ -76,7 +79,8 @@ export default {
     return {
       titleFixed: false,
       i18n: "cn",
-      publicPath: process.env.BASE_URL
+      publicPath: process.env.BASE_URL,
+      message: "TSPUcs5X1wxGf7q9ni6TBtpA9ZyvKQyVga"
     };
   },
   activated() {
@@ -84,10 +88,16 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
   },
   methods: {
+    onCopy() {
+      this.$toasted
+        .show(this.i18n === "cn"?"复制成功！":"Copy successfully！", {
+          className: "copy_success"
+        })
+        .goAway(1500);
+    },
     //滚动监听，头部固定
     handleScroll: function() {
       let offsetTop = this.$refs.pride_tab_fixed.getBoundingClientRect().top;
-      console.log(offsetTop);
       this.titleFixed = offsetTop < 0;
       // some code
     },
@@ -142,7 +152,7 @@ body {
 }
 .contract {
   position: absolute;
-  right: .3rem;
+  right: 0.3rem;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -216,6 +226,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     text-decoration: none;
+    font-weight: 700;
   }
   .top .sticky a {
     margin-right: 10px;
@@ -224,7 +235,7 @@ body {
     font-size: 9vw !important;
   }
   .top .t1 {
-    font-size: 5vw;
+    font-size: 4.5vw;
   }
 }
 .top .sticky.isFixed svg {
@@ -242,37 +253,16 @@ body {
   position: absolute;
 }
 .top .sticky svg {
-  width: 1.5rem ;
-  height: 1.5rem ;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 .top .t1 {
-  font-size: 4vw;
+  font-size: 3vw;
   font-weight: 500;
   position: relative;
   margin-bottom: 33px;
   /* padding: 0 3rem; */
 }
-/* .top .t1::after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 94px;
-  height: 6px;
-  border-radius: 3px;
-  background: -webkit-gradient(
-    linear,
-    left top,
-    right bottom,
-    from(#0085db),
-    to(#00d1cd)
-  );
-  background: linear-gradient(to bottom right, #0085db 0%, #00d1cd 100%);
-  bottom: -9px;
-  left: 50%;
-  -webkit-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
-} */
 .top .t2 {
   font-size: 2.5vw;
   font-weight: 300;
@@ -340,5 +330,9 @@ footer .copyright {
 }
 #app .card {
   font-size: 6vw;
+}
+#app .address {
+  cursor: pointer;
+  text-decoration: underline;
 }
 </style>
