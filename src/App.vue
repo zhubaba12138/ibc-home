@@ -48,7 +48,7 @@
           <div class="t2">
             初始总量：100,000,000（交易燃烧会使代币总量持续减少）<br />
             代币分配：无预挖、团队无持币，所有代币投入资金池<br />
-            私募价格：1TRX : 3IBT<br />
+            私募价格：1TRX : 5IBT<br />
           </div>
           <div class="r3">
             <a :href="`${publicPath}IBT_whitepaper_cn.pdf`" target="_blank">
@@ -116,7 +116,7 @@ export default {
     axios
       .get("http://quan.suning.com/getSysTime.do")
       .then(function(response) {
-        const timeDiff = moment(moment("2020-09-15 00:00:00")).diff(
+        const timeDiff = moment(moment("2020-09-14 22:00:00")).diff(
           new Date(response.data.sysTime2)
         );
         var deadline = new Date(
