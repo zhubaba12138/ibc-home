@@ -10,8 +10,10 @@
   "dependencies": {
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
+    "echarts": "^4.9.0",
     "moment": "^2.27.0",
     "svg-sprite-loader": "^5.0.0",
+    "tronweb": "^3.0.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
@@ -37,7 +39,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-debugger": "off",
+      "no-console": "off"
+    }
   },
   "browserslist": [
     "> 1%",

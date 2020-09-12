@@ -24,6 +24,7 @@
             <a href=""><button>LITEPAPER</button></a>
           </div>
         </div>
+        <Grid></Grid>
         <div id="clock"></div>
       </div>
     </div>
@@ -36,11 +37,15 @@
 
 <script>
 import { Clock } from "./clock.js";
+import Grid from "./components/grid";
 import axios from "axios";
 import moment from "moment";
 import "./clock.less";
 export default {
   name: "App",
+  components: {
+    Grid
+  },
   data() {
     return {
       titleFixed: false
