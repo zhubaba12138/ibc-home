@@ -1,19 +1,19 @@
 <template>
   <div class="grid">
-    <div class="title">数据面板</div>
+    <div class="title">{{ this.i18n === "cn" ? "数据面板" : "Data" }}</div>
     <div class="chart" ref="chart"></div>
     <div class="grid-list">
       <div class="grid-list-item">
-        <p>100,000,000</p>
-        <span>初始发行量</span>
+        <p>{{ total }}</p>
+        <span>{{ this.i18n === "cn" ? "初始发行量" : "Circulation" }}</span>
       </div>
       <div class="grid-list-item">
-        <p>93,814,048</p>
-        <span>流通代币</span>
+        <p>{{ totalSupply }}</p>
+        <span>{{ this.i18n === "cn" ? "流通代币" : "Destroyed" }}</span>
       </div>
       <div class="grid-list-item">
-        <p>6,185,952</p>
-        <span>已销毁代币</span>
+        <p>{{ otherToken }}</p>
+        <span>{{ this.i18n === "cn" ? "已销毁代币" : "Data" }}</span>
       </div>
       <div class="grid-list-item">
         <p>205</p>
@@ -42,6 +42,38 @@
       <div class="grid-list-item">
         <p>2</p>
         <span>发奖次数</span>
+        <p>205</p>
+        <span>{{ this.i18n === "cn" ? "持币地址数" : "Total Address" }}</span>
+      </div>
+      <div class="grid-list-item">
+        <p>{{ burnRate }}</p>
+        <span>{{ this.i18n === "cn" ? "当前燃烧率" : "Burn Rate" }}</span>
+      </div>
+      <div class="grid-list-item">
+        <p>{{ dividePoolAmount }}IBT</p>
+        <span>{{ this.i18n === "cn" ? "分红池" : "Dividend Pool" }}</span>
+      </div>
+      <div class="grid-list-item">
+        <p>158</p>
+        <span>{{
+          this.i18n === "cn" ? "可分红地址数" : "Dividend Addresses"
+        }}</span>
+      </div>
+      <div class="grid-list-item">
+        <p>53,929.51</p>
+        <span>{{
+          this.i18n === "cn" ? "每个地址预计分红" : "Dividend for each address"
+        }}</span>
+      </div>
+      <div class="grid-list-item">
+        <p>{{ transferRewardPoolAmount }}</p>
+        <span>{{ this.i18n === "cn" ? "大奖池" : "Prize Pool" }}</span>
+      </div>
+      <div class="grid-list-item">
+        <p>2</p>
+        <span>{{
+          this.i18n === "cn" ? "发奖次数" : "Number of prizes issued"
+        }}</span>
       </div>
     </div>
     <div class="fomo_title">
@@ -68,7 +100,7 @@ export default {
   name: "grid",
   data() {
     return {
-      investContract: "TKzEDGrsGPzt86d4Cv6pmZDe9CsA6NfkZC",
+      investContract: "TNrXTDu4pX24G18PBdn3jfrtVeb4jrkCTY",
       contract: "",
       tronweb: "",
       address: "",
@@ -76,7 +108,7 @@ export default {
       total: 100000000,
       totalSupply: 0,
       otherToken: 100000000,
-      burnRate: "-- %",
+      burnRate: "15 %",
       transferRewardPoolAmount: "-",
       dividePoolAmount: "-",
       tokenHolderCount: "-",
@@ -86,9 +118,11 @@ export default {
       divideUserCount: "-",
       divideCount: "-",
       transactions: {},
-      fomoList: []
+      fomoList: [],
+      fomoTimer: 480
     };
   },
+  props: ["i18n"],
   mounted() {
     const HttpProvider = TronWeb.providers.HttpProvider;
     const fullNode = new HttpProvider("https://api.trongrid.io");
@@ -134,25 +168,23 @@ export default {
       option.series[0].center = [300, 168];
     }
     // 初始化
-    this.myChart = this.$echarts.init(this.$refs.chart);
-    this.myChart.setOption(option);
+    // this.myChart = this.$echarts.init(this.$refs.chart);
+    // this.myChart.setOption(option);
   },
   methods: {
     init() {
       this.getDividePoolAmount();
-      this.getTransferRewardPoolAmount();
-      this.getBurnRate();
+      // this.getTransferRewardPoolAmount();
+      // this.getBurnRate();
       this.getTotalSupply();
       this.getCurrentBlock();
       this.getFomoAddress();
     },
     async login() {
       // 实例化合约
-      await this.tronweb.setAddress("TNrXTDu4pX24G18PBdn3jfrtVeb4jrkCTY");
-      console.log(this.tronweb.isAddress("TNrXTDu4pX24G18PBdn3jfrtVeb4jrkCTY"));
       try {
         this.contract = await this.tronweb.contract().at(this.investContract);
-        console.log(this.contract);
+        await this.tronweb.setAddress("TNrXTDu4pX24G18PBdn3jfrtVeb4jrkCTY");
       } catch (e) {
         console.log(e);
       }
@@ -160,7 +192,6 @@ export default {
       setInterval(() => {
         this.init();
       }, 10000);
-      // }
     },
     // 分红池金额
     async getDividePoolAmount() {
@@ -175,7 +206,26 @@ export default {
         (await this.contract.TransferRewardPoolAmount().call()) /
         Math.pow(10, this.precision)
       ).toFixed(2);
+      this.tronweb.trx
+        .getAccount("TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G")
+        .then(result => {
+          this.dividePoolAmount = result.balance;
+        });
+      // this.dividePoolAmount =
+      //     ((await this.contract.DividePoolAmount().call()) /
+      //         Math.pow(10, this.precision)).toFixed(2);
     },
+    // 交易奖池金额
+    // async getTransferRewardPoolAmount() {
+    //   this.tronweb.trx
+    //     .getAccount("TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3")
+    //     .then(result => {
+    //       this.transferRewardPoolAmount = result.balance;
+    //     });
+    // this.transferRewardPoolAmount =
+    //     ((await this.contract.TransferRewardPoolAmount().call()) /
+    //         Math.pow(10, this.precision)).toFixed(2);
+    // },
     // 当前燃烧率
     async getBurnRate() {
       this.burnRate = (await this.contract.getBurnRate().call()) + "%";
@@ -207,11 +257,50 @@ export default {
           }
         ]
       });
+      (
+        (await this.contract.totalSupply().call()) /
+        Math.pow(10, this.precision)
+      ).toFixed(2);
+      this.otherToken = (this.total - this.totalSupply).toFixed(2);
+
+      // this.myChart.setOption({
+      //   series: [
+      //     {
+      //       name: "token",
+      //       data: [
+      //         {
+      //           value: this.totalSupply,
+      //           name: '流通代币',
+      //           itemStyle: { color: "#0EC8FF" },
+      //         },
+      //         {
+      //           value: this.total - this.totalSupply,
+      //           name: '已销毁代币',
+      //           itemStyle: { color: "#E500FF" },
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // });
     },
     //获取最新交易信息
     async getCurrentBlock() {
-      let currentBlock = await this.tronweb.trx.getCurrentBlock();
-      this.transactions = currentBlock.transactions;
+      axios
+        .get(
+          "https://apilist.tronscan.org/api/token_trc20/transfers?limit=20&start=0&contract_address=TNrXTDu4pX24G18PBdn3jfrtVeb4jrkCTY"
+        )
+        .then(res => {
+          this.transactions = res.data.token_transfers;
+          this.transactions.forEach(k => {
+            if (k.from_address === "TNrXTDu4pX24G18PBdn3jfrtVeb4jrkCTY") {
+              if (k.block_ts) {
+                this.fomoTimer = 480;
+              }else{
+                console.log(k.to_address)
+              }
+            }
+          });
+        });
       console.log(this.transactions);
     },
     //获取中奖地址

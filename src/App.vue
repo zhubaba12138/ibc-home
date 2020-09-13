@@ -120,7 +120,7 @@ Initial total amount: 100,000,000 (trading burning will cause the total amount o
         <div id="clock"></div>
       </div>
     </div>
-    <Grid></Grid>
+   <Grid :i18n="i18n"></Grid>
     <div class="investors">
       <div class="page_title">
         {{ this.i18n === "cn" ? "合作机构" : "INVESTORS" }}
