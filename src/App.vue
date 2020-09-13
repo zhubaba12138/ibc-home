@@ -146,7 +146,7 @@ Initial total amount: 100,000,000 (trading burning will cause the total amount o
 <script>
 import { Clock } from "./clock.js";
 import Grid from './components/grid';
-import axios from "axios";
+// import axios from "axios";
 import moment from "moment";
 import "./clock.less";
 export default {
