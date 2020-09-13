@@ -46,21 +46,55 @@
             </span>
           </div>
           <div class="t2">
-            IBT Token 是基于区块链的新型社会实验型代币。 它基于 Tron
+            {{
+              this.i18n === "cn"
+                ? `IBT Token 是基于区块链的新型社会实验型代币。 它基于 Tron
             发行，在其智能合约中，除常规功能外，还内嵌了交易燃烧、尾单博
-            弈、持币分红,子母币四种独特机制。<br />
-            代币名称：IBT Token 代币符号：IBT<br />
-            初始总量：100,000,000（交易燃烧会使代币总量持续减少）
-            代币分配：无预挖、<br />
-            团队无持币，所有代币投入资金池<br />
-            代币类型：TRC-20<br />
-            上线交易所：JustSwap<br />
-            私募价格：1TRX：5IBT, 软顶:3000000TRX，硬顶:5000000TRX，私募资金
-            90%<br />
-            注入 AMM 交易所资金池，10%团队用于运营与开发。<br />
-            上线时间：2020 年 9 月 15 日 20:00<br />
+            弈、持币分红,子母币四种独特机制。`
+                : `IBT Token is a new type of social experimental token based on blockchain. It is based on Tron
+            Issuance, in its smart contract, in addition to regular functions, it also embeds transaction burning and tail order blogging
+            There are four unique mechanisms of game, holding currency dividends, and parent currency.`
+            }}<br />
+            {{
+              this.i18n === "cn"
+                ? `代币名称：IBT Token 代币符号：IBT`
+                : `Token name: IBT Token Token symbol: IBT`
+            }}<br />
+            {{
+              this.i18n === "cn"
+                ? `初始总量：100,000,000（交易燃烧会使代币总量持续减少）`
+                : `
+Initial total amount: 100,000,000 (trading burning will cause the total amount of tokens to continue to decrease)`
+            }}
+            {{
+              this.i18n === "cn"
+                ? `代币分配：无预挖、`
+                : `Token distribution: no pre-mining`
+            }}
+            <br />
+            {{
+              this.i18n === "cn"
+                ? `团队无持币，所有代币投入资金池`
+                : `The team has no tokens, all tokens are invested in the fund pool`
+            }}<br />
+            {{ this.i18n === "cn" ? `代币类型：TRC-20` : `Token type: TRC-20`
+            }}<br />
+            {{
+              this.i18n === "cn"
+                ? `上线交易所：JustSwap`
+                : `Online exchange: JustSwap`
+            }}<br />
+            {{
+              this.i18n === "cn"
+                ? `私募价格：1TRX：5IBT, 软顶:3000000TRX，硬顶:5000000TRX，私募资金注入 AMM 交易所资金池，10%团队用于运营与开发。
+            90%`
+                : `Private placement price: 1TRX: 5IBT, soft cap: 3000000TRX, hard cap: 5000000TRX, private placement funds are injected into the AMM exchange capital pool, 10% of the team is used for operation and development`
+            }}<br />
+            <br />
+            {{this.i18n === "cn"?`上线时间：2020 年 9 月 15 日 20:00`:`Online time: 20:00, September 15, 2020`}}
+            <br />
             <p>
-              由于IBT项目受到海外投资的赞助,近期有大量假币上线JustSwap,请谨防上当受骗,本项目上线后官网会公布合约地址
+             {{this.i18n === "cn"?`由于IBT项目受到海外投资的赞助,近期有大量假币上线JustSwap,请谨防上当受骗,本项目上线后官网会公布合约地址`:"Since the IBT project is sponsored by overseas investment, a large number of counterfeit currencies have recently been launched on JustSwap. Please beware of being deceived. The official website will announce the contract address after the project is launched."}} 
             </p>
             <p />
           </div>
@@ -102,7 +136,6 @@
 
 <script>
 import { Clock } from "./clock.js";
-import axios from "axios";
 import moment from "moment";
 import "./clock.less";
 export default {
@@ -140,22 +173,11 @@ export default {
   mounted() {
     this.titleFixed = false;
     window.addEventListener("scroll", this.handleScroll);
-    axios
-      .get("http://quan.suning.com/getSysTime.do")
-      .then(function(response) {
-        const timeDiff = moment(moment("2020-09-14 22:00:00")).diff(
-          new Date(response.data.sysTime2)
-        );
-        var deadline = new Date(
-          Date.parse(new Date(response.data.sysTime2)) + timeDiff
-        );
-        let clockdDom = new Clock(new Date(deadline), function() {});
-        let clockBox = document.querySelector("#clock");
-        clockBox.appendChild(clockdDom.el);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+    const timeDiff = moment(moment("2020-09-14 22:00:00")).diff(new Date());
+    var deadline = new Date(Date.parse(new Date()) + timeDiff);
+    let clockdDom = new Clock(new Date(deadline), function() {});
+    let clockBox = document.querySelector("#clock");
+    clockBox.appendChild(clockdDom.el);
   }
 };
 </script>
