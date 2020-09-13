@@ -32,7 +32,7 @@
           <div class="t1">
             {{
               this.i18n === "cn"
-                ? "IBT Token 私募活动火热进行中！"
+                ? "IBT Token 私募活动火热进行中！起投金额5000TRX"
                 : "The private placement of IBT tokens is underway!"
             }}
             <br />
