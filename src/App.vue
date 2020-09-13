@@ -78,6 +78,7 @@
         <div id="clock"></div>
       </div>
     </div>
+    <Grid></Grid>
     <div class="investors">
       <div class="page_title">
         {{ this.i18n === "cn" ? "合作机构" : "INVESTORS" }}
@@ -102,11 +103,15 @@
 
 <script>
 import { Clock } from "./clock.js";
+import Grid from './components/grid';
 import axios from "axios";
 import moment from "moment";
 import "./clock.less";
 export default {
   name: "App",
+  components: {
+    Grid
+  },
   data() {
     return {
       titleFixed: false,
