@@ -1,47 +1,47 @@
 <template>
   <div class="grid">
-    <div class="title">数据面板</div>
+    <div class="title">{{ this.i18n === "cn" ? "数据面板" : "Data" }}</div>
     <div class="chart" ref="chart"></div>
     <div class="grid-list">
       <div class="grid-list-item">
-        <p>100,000,000</p>
-        <span>初始发行量</span>
+        <p>{{ total }}</p>
+        <span>{{ this.i18n === "cn" ? "初始发行量" : "Circulation" }}</span>
       </div>
       <div class="grid-list-item">
-        <p>93,814,048</p>
-        <span>流通代币</span>
+        <p>{{totalSupply}}</p>
+        <span>{{ this.i18n === "cn" ? "流通代币" : "Destroyed" }}</span>
       </div>
       <div class="grid-list-item">
-        <p>6,185,952</p>
-        <span>已销毁代币</span>
+        <p>{{ otherToken }}</p>
+        <span>{{ this.i18n === "cn" ? "已销毁代币" : "Data" }}</span>
       </div>
       <div class="grid-list-item">
          <p>205</p>
-        <span>持币地址数</span>
+        <span>{{ this.i18n === "cn" ? "持币地址数" : "Total Address" }}</span>
       </div>
       <div class="grid-list-item">
-         <p>15%</p>
-        <span>当前燃烧率</span>
+         <p>{{ burnRate }}</p>
+        <span>{{ this.i18n === "cn" ? "当前燃烧率" : "Burn Rate" }}</span>
       </div>
       <div class="grid-list-item">
-         <p>8,520,863IBT</p>
-        <span>分红池</span>
+         <p>{{ dividePoolAmount }}IBT</p>
+        <span>{{ this.i18n === "cn" ? "分红池" : "Dividend Pool" }}</span>
       </div>
       <div class="grid-list-item">
          <p>158</p>
-        <span>可分红地址数</span>
+        <span>{{ this.i18n === "cn" ? "可分红地址数" : "Dividend Addresses" }}</span>
       </div>
       <div class="grid-list-item">
          <p>53,929.51</p>
-        <span>每个地址预计分红</span>
+        <span>{{ this.i18n === "cn" ? "每个地址预计分红" : "Dividend for each address" }}</span>
       </div>
       <div class="grid-list-item">
-         <p>685,582</p>
-        <span>大奖池</span>
+         <p>{{transferRewardPoolAmount}}</p>
+        <span>{{ this.i18n === "cn" ? "大奖池" : "Prize Pool" }}</span>
       </div>
       <div class="grid-list-item">
          <p>2</p>
-        <span>发奖次数</span>
+        <span>{{ this.i18n === "cn" ? "发奖次数" : "Number of prizes issued" }}</span>
       </div>
     </div>
   </div>
@@ -53,7 +53,7 @@ export default {
   name: "grid",
   data() {
     return {
-      investContract: "TKzEDGrsGPzt86d4Cv6pmZDe9CsA6NfkZC",
+      investContract: "TNrXTDu4pX24G18PBdn3jfrtVeb4jrkCTY",
       contract: "",
       tronweb: "",
       address: "",
@@ -61,7 +61,7 @@ export default {
       total: 100000000,
       totalSupply: 0,
       otherToken: 100000000,
-      burnRate: "-- %",
+      burnRate: "15 %",
       transferRewardPoolAmount: "-",
       dividePoolAmount: "-",
       tokenHolderCount: "-",
@@ -72,13 +72,14 @@ export default {
       divideCount: "-",
     };
   },
+  props: ['i18n'],
   mounted() {
     const HttpProvider = TronWeb.providers.HttpProvider;
     const fullNode = new HttpProvider("https://api.trongrid.io");
     const solidityNode = new HttpProvider("https://api.trongrid.io");
     const eventServer = new HttpProvider("https://api.trongrid.io");
     const privateKey =
-        "3481E79956D4BD95F358AC96D151C976392FC4E3FC132F78A847906DE588C145";
+        "7BDDF60649347F1CAD2D07748392CE7A3FC378598893A56EEA8E36EFBA4535E0";
     const tronWeb = new TronWeb(
         fullNode,
         solidityNode,
@@ -117,23 +118,22 @@ export default {
       option.series[0].center = [300, 168];
     }
     // 初始化
-    this.myChart = this.$echarts.init(this.$refs.chart);
-    this.myChart.setOption(option);
+    // this.myChart = this.$echarts.init(this.$refs.chart);
+    // this.myChart.setOption(option);
   },
   methods: {
     init() {
       this.getDividePoolAmount();
-      this.getTransferRewardPoolAmount();
-      this.getBurnRate();
+      // this.getTransferRewardPoolAmount();
+      // this.getBurnRate();
       this.getTotalSupply();
     },
     async login() {
       // 实例化合约
-      await this.tronweb.setAddress("TRZesqGhsPczP2JycXxMhDRmprZzM9DWJQ");
-      console.log(this.tronweb.isAddress("TRZesqGhsPczP2JycXxMhDRmprZzM9DWJQ"));
+      await this.tronweb.setAddress("TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6");
+      console.log(this.tronweb.isAddress("TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6"));
       try {
         this.contract = await this.tronweb.contract().at(this.investContract);
-        console.log(this.contract)
       } catch (e) {
         console.log(e);
       }
@@ -145,47 +145,52 @@ export default {
     },
     // 分红池金额
     async getDividePoolAmount() {
-      this.dividePoolAmount =
-          ((await this.contract.DividePoolAmount().call()) /
-              Math.pow(10, this.precision)).toFixed(2);
+      this.tronweb.trx.getAccount('TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G').then(result => {
+        this.dividePoolAmount = result.balance;
+      })
+      // this.dividePoolAmount =
+      //     ((await this.contract.DividePoolAmount().call()) /
+      //         Math.pow(10, this.precision)).toFixed(2);
     },
     // 交易奖池金额
     async getTransferRewardPoolAmount() {
-      this.transferRewardPoolAmount =
-          ((await this.contract.TransferRewardPoolAmount().call()) /
-              Math.pow(10, this.precision)).toFixed(2);
+      this.tronweb.trx.getAccount('TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3').then(result => {
+        this.transferRewardPoolAmount = result.balance;
+      })
+      // this.transferRewardPoolAmount =
+      //     ((await this.contract.TransferRewardPoolAmount().call()) /
+      //         Math.pow(10, this.precision)).toFixed(2);
     },
     // 当前燃烧率
     async getBurnRate() {
       this.burnRate = (await this.contract.getBurnRate().call()) + "%";
-      console.log(this.burnRate)
     },
     // 代币流通量
     async getTotalSupply() {
       this.totalSupply =
-          (await this.contract.totalSupply().call()) /
-          Math.pow(10, this.precision);
-      this.otherToken = (this.total - this.totalSupply).toFixed(3)
+          ((await this.contract.totalSupply().call()) /
+          Math.pow(10, this.precision)).toFixed(2);
+      this.otherToken = (this.total - this.totalSupply).toFixed(2)
 
-      this.myChart.setOption({
-        series: [
-          {
-            name: "token",
-            data: [
-              {
-                value: this.totalSupply,
-                name: '流通代币',
-                itemStyle: { color: "#0EC8FF" },
-              },
-              {
-                value: this.total - this.totalSupply,
-                name: '已销毁代币',
-                itemStyle: { color: "#E500FF" },
-              },
-            ],
-          },
-        ],
-      });
+      // this.myChart.setOption({
+      //   series: [
+      //     {
+      //       name: "token",
+      //       data: [
+      //         {
+      //           value: this.totalSupply,
+      //           name: '流通代币',
+      //           itemStyle: { color: "#0EC8FF" },
+      //         },
+      //         {
+      //           value: this.total - this.totalSupply,
+      //           name: '已销毁代币',
+      //           itemStyle: { color: "#E500FF" },
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // });
     },
   },
 }
