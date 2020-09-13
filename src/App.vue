@@ -59,6 +59,7 @@
             90%<br />
             注入 AMM 交易所资金池，10%团队用于运营与开发。<br />
             上线时间：2020 年 9 月 15 日 20:00<br />
+            <p>由于IBT项目受到海外投资的赞助,近期有大量假币上线JustSwap,请谨防上当受骗,本项目上线后官网会公布合约地址<p/>
           </div>
           <div class="r3">
             <a :href="`${publicPath}IBT_whitepaper_cn.pdf`" target="_blank">
