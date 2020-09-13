@@ -86,15 +86,23 @@ Initial total amount: 100,000,000 (trading burning will cause the total amount o
             }}<br />
             {{
               this.i18n === "cn"
-                ? `私募价格：1TRX：5IBT, 软顶:3000000TRX，硬顶:5000000TRX，私募资金注入 AMM 交易所资金池，10%团队用于运营与开发。
-            90%`
-                : `Private placement price: 1TRX: 5IBT, soft cap: 3000000TRX, hard cap: 5000000TRX, private placement funds are injected into the AMM exchange capital pool, 10% of the team is used for operation and development`
+                ? `私募价格：1TRX：5IBT, 软顶:3000000TRX，硬顶:5000000TRX，私募资金90%注入 AMM 交易所资金池，10%团队用于运营与开发。
+            `
+                : `Private placement price: 1TRX: 5IBT, soft cap: 3000000TRX, hard cap: 5000000TRX, 90% of private equity funds are injected into the AMM exchange fund pool, 10% of the team is used for operation and development`
             }}<br />
             <br />
-            {{this.i18n === "cn"?`上线时间：2020 年 9 月 15 日 20:00`:`Online time: 20:00, September 15, 2020`}}
+            {{
+              this.i18n === "cn"
+                ? `上线时间：2020 年 9 月 15 日 20:00`
+                : `Online time: 20:00, September 15, 2020`
+            }}
             <br />
             <p>
-             {{this.i18n === "cn"?`由于IBT项目受到海外投资的赞助,近期有大量假币上线JustSwap,请谨防上当受骗,本项目上线后官网会公布合约地址`:"Since the IBT project is sponsored by overseas investment, a large number of counterfeit currencies have recently been launched on JustSwap. Please beware of being deceived. The official website will announce the contract address after the project is launched."}} 
+              {{
+                this.i18n === "cn"
+                  ? `由于IBT项目受到海外投资的赞助,近期有大量假币上线JustSwap,请谨防上当受骗,本项目上线后官网会公布合约地址`
+                  : "Since the IBT project is sponsored by overseas investment, a large number of counterfeit currencies have recently been launched on JustSwap. Please beware of being deceived. The official website will announce the contract address after the project is launched."
+              }}
             </p>
             <p />
           </div>
