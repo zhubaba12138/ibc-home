@@ -59,7 +59,10 @@
             90%<br />
             注入 AMM 交易所资金池，10%团队用于运营与开发。<br />
             上线时间：2020 年 9 月 15 日 20:00<br />
-            <p>由于IBT项目受到海外投资的赞助,近期有大量假币上线JustSwap,请谨防上当受骗,本项目上线后官网会公布合约地址<p/>
+            <p>
+              由于IBT项目受到海外投资的赞助,近期有大量假币上线JustSwap,请谨防上当受骗,本项目上线后官网会公布合约地址
+            </p>
+            <p />
           </div>
           <div class="r3">
             <a :href="`${publicPath}IBT_whitepaper_cn.pdf`" target="_blank">
@@ -69,8 +72,25 @@
             </a>
           </div>
         </div>
-        <span class="countdown">{{ this.i18n === "cn" ? "私募倒计时" : "Countdown" }}</span>
+        <span class="countdown">{{
+          this.i18n === "cn" ? "私募倒计时" : "Countdown"
+        }}</span>
         <div id="clock"></div>
+      </div>
+    </div>
+    <div class="investors">
+      <div class="page_title">
+        {{ this.i18n === "cn" ? "合作机构" : "INVESTORS" }}
+      </div>
+      <div class="investors_list">
+        <img src="./assets/c1.png" />
+        <img src="./assets/c2.png" />
+        <img src="./assets/c3.png" />
+        <img src="./assets/c4.png" />
+        <img src="./assets/c5.png" />
+        <img src="./assets/c6.png" />
+        <img src="./assets/c7.png" />
+        <img src="./assets/c8.png" />
       </div>
     </div>
     <footer>
@@ -354,9 +374,66 @@ footer .copyright {
   text-decoration: underline;
 }
 .countdown {
-  font-size:20px;
+  font-size: 20px;
 }
 .containaer {
-  margin-bottom:30px;
+  margin-bottom: 30px;
+}
+.page_title {
+  font-size: 42px;
+  font-weight: 500;
+  position: relative;
+  margin-bottom: 58px;
+  text-align: center;
+  margin-bottom: 75px;
+}
+.page_title::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 94px;
+  height: 6px;
+  border-radius: 3px;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right bottom,
+    from(#0085db),
+    to(#00d1cd)
+  );
+  background: linear-gradient(to bottom right, #0085db 0%, #00d1cd 100%);
+  bottom: -23px;
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+.investors {
+  padding: 0 20px;
+  padding-top: 100px;
+  padding-bottom: 80px;
+  max-width: 1200px;
+  margin: auto;
+}
+.investors img {
+  height: 64px;
+  width: 100%;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+.investors_list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  -webkit-column-gap: 60px;
+  column-gap: 60px;
+  row-gap: 50px;
+}
+@media screen and (max-width: 600px) {
+  .investors_list {
+    grid-template-columns: repeat(2, 1fr);
+    -webkit-column-gap: 30px;
+    column-gap: 30px;
+    row-gap: 15px;
+  }
 }
 </style>
