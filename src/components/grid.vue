@@ -16,7 +16,7 @@
         <span>{{ this.i18n === "cn" ? "已销毁代币" : "Data" }}</span>
       </div>
       <div class="grid-list-item">
-         <p>205</p>
+         <p>{{ tokenHolderCount }}</p>
         <span>{{ this.i18n === "cn" ? "持币地址数" : "Total Address" }}</span>
       </div>
       <div class="grid-list-item">
@@ -28,11 +28,11 @@
         <span>{{ this.i18n === "cn" ? "分红池" : "Dividend Pool" }}</span>
       </div>
       <div class="grid-list-item">
-         <p>158</p>
+         <p>78</p>
         <span>{{ this.i18n === "cn" ? "可分红地址数" : "Dividend Addresses" }}</span>
       </div>
       <div class="grid-list-item">
-         <p>53,929.51</p>
+         <p>{{ ( dividePoolAmount / 78 ).toFixed(2) }}</p>
         <span>{{ this.i18n === "cn" ? "每个地址预计分红" : "Dividend for each address" }}</span>
       </div>
       <div class="grid-list-item">
@@ -49,6 +49,7 @@
 
 <script>
 import TronWeb from "tronweb";
+import axios from "axios";
 export default {
   name: "grid",
   data() {
@@ -126,6 +127,7 @@ export default {
       this.getDividePoolAmount();
       // this.getTransferRewardPoolAmount();
       // this.getBurnRate();
+      this.getDividePoolNumber();
       this.getTotalSupply();
     },
     async login() {
@@ -142,6 +144,16 @@ export default {
         this.init();
       }, 10000);
       // }
+    },
+    getDividePoolNumber() {
+      axios
+        .get("https://apilist.tronscan.org/api/token_trc20/holders?sort=-balance&start=0&limit=20&contract_address=TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6")
+        .then((response) => {
+          this.tokenHolderCount = response.data.total;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
     // 分红池金额
     async getDividePoolAmount() {
