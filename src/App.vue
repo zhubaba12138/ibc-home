@@ -33,7 +33,7 @@
             {{
               this.i18n === "cn"
                 ? "IBT Token 私募活动火热进行中！起投金额5000TRX"
-                : "The private placement of IBT tokens is underway!"
+                : "The private placement of IBT tokens is underway!Starting amount 5000TRX"
             }}
             <br />
             {{ this.i18n === "cn" ? "私募地址：" : "Cryptocurrency wallet：" }}
