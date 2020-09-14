@@ -35,7 +35,7 @@
                 ? "IBT Token 私募活动火热进行中！"
                 : "The private placement of IBT tokens is underway!"
             }}
-            <br />
+            <br /> 
             {{ this.i18n === "cn" ? "私募地址：" : "Cryptocurrency wallet：" }}
             <span
               class="address"
@@ -43,6 +43,20 @@
               v-clipboard:success="onCopy"
             >
               TSPUcs5X1wxGf7q9ni6TBtpA9ZyvKQyVga
+            </span>
+            <br /><br />
+            {{
+              this.i18n === "cn"
+                ? "因现有匿名社区投资本项目,项目团队特别开放专用私募通道: "
+                : "Due to the existing anonymous community investing in this project, the project team has opened a dedicated private equity channel: "
+            }}
+            <br />
+            <span
+              class="address"
+              v-clipboard:copy="message"
+              v-clipboard:success="onCopy"
+            >
+              TTxwHsrDARP1cCzkYssXhDHGJEk3DueihS
             </span>
           </div>
           <div class="t2">
@@ -328,7 +342,7 @@ li {
   font-weight: 500;
   position: relative;
   margin-bottom: 33px;
-  /* padding: 0 3rem; */
+  /* padding: 0 1rem; */
 }
 .top .t2 {
   font-size: 1.8vw;
