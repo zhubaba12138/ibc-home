@@ -90,12 +90,12 @@
             </a>
           </div>
         </div>
-        <span class="countdown">
+        <!-- <span class="countdown">
           {{
           this.i18n === "cn" ? "私募倒计时" : "Countdown"
           }}
-        </span>
-        <div id="clock"></div>
+        </span> -->
+        <!-- <div id="clock"></div> -->
       </div>
     </div>
     <div class="investors">
@@ -119,8 +119,8 @@
 </template>
 
 <script>
-import { Clock } from "./clock.js";
-import moment from "moment";
+// import { Clock } from "./clock.js";
+// import moment from "moment";
 import "./clock.less";
 export default {
   name: "App",
@@ -162,11 +162,11 @@ export default {
   mounted() {
     this.titleFixed = false;
     window.addEventListener("scroll", this.handleScroll);
-    const timeDiff = moment(moment("2020-09-15 12:00:00")).diff(new Date());
-    var deadline = new Date(Date.parse(new Date()) + timeDiff);
-    let clockdDom = new Clock(new Date(deadline), function() {});
-    let clockBox = document.querySelector("#clock");
-    clockBox.appendChild(clockdDom.el);
+    // const timeDiff = moment(moment("2020-09-15 12:00:00")).diff(new Date());
+    // var deadline = new Date(Date.parse(new Date()) + timeDiff);
+    // let clockdDom = new Clock(new Date(deadline), function() {});
+    // let clockBox = document.querySelector("#clock");
+    // clockBox.appendChild(clockdDom.el);
   }
 };
 </script>
