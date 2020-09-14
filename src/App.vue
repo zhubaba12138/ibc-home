@@ -49,18 +49,25 @@
                 this.i18n === "cn" ? "IBT合约地址: " : "IBT Contract Address: "
               }`
             }}
-            <span
+            <p
               class="address"
               v-clipboard:copy="message3"
               v-clipboard:success="onCopy"
-              >TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6</span
-            ><br /><br />
+            >
+              TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6
+            </p>
+            <br /><br />
             {{
               this.i18n === "cn"
                 ? "已上波宝钱包，请下载波宝钱包导入合约地址查看资产"
                 : "The Bobo Wallet has been uploaded, please download Bobo Wallet and import the contract address to view assets"
             }}<br />
-            <a class="download" href="https://www.tronlink.org" target="_blank">{{ "https://www.tronlink.org/" }}</a>
+            <a class="download" href="https://www.tronlink.org" target="_blank"
+              >{{ this.i18n === "cn" ? "去下载" : "Download" }}
+              <!-- <div>
+                <svg viewBox="0 0 24 24"></svg>
+              </div> -->
+            </a>
             <br />
             <br />
             {{
@@ -99,13 +106,7 @@
                 : `Private placement price: 1TRX: 5IBT, 90% of private equity funds are injected into the AMM exchange fund pool, 10% of the team is used for operation and development`
             }}
             <br />
-            <p>
-              {{
-                this.i18n === "cn"
-                  ? `由于IBT项目受到海外投资的赞助,近期有大量假币上线JustSwap,请谨防上当受骗,本项目上线后官网会公布合约地址`
-                  : "Since the IBT project is sponsored by overseas investment, a large number of counterfeit currencies have recently been launched on JustSwap. Please beware of being deceived. The official website will announce the contract address after the project is launched."
-              }}
-            </p>
+            <p></p>
             <p />
           </div>
           <div class="r3">
@@ -519,6 +520,7 @@ footer .copyright {
 #app .address {
   cursor: pointer;
   text-decoration: underline;
+  word-break: break-all;
 }
 .countdown {
   font-size: 20px;
@@ -584,6 +586,14 @@ footer .copyright {
   }
 }
 .download {
-  color: rgb(102, 153, 255);
+  background: rgb(102, 153, 255);
+  color: #fff;
+  display: inline-block;
+  width: 150px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 8px;
+  text-decoration: unset;
+  margin-top: 20px;
 }
 </style>
