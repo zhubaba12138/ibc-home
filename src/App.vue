@@ -60,7 +60,7 @@
                 ? "已上波宝钱包，请下载波宝钱包导入合约地址查看资产"
                 : "The Bobo Wallet has been uploaded, please download Bobo Wallet and import the contract address to view assets"
             }}<br />
-            <a class="download" href="https://www.tronlink.org/cn/" target="_blank">{{ "https://www.tronlink.org/cn/" }}</a>
+            <a class="download" href="https://www.tronlink.org" target="_blank">{{ "https://www.tronlink.org/" }}</a>
             <br />
             <br />
             {{
