@@ -35,11 +35,11 @@
                 ? "IBT Token 私募活动火热进行中！"
                 : "The private placement of IBT tokens is underway!"
             }}
-            <br /> 
+            <br />
             {{ this.i18n === "cn" ? "私募地址：" : "Cryptocurrency wallet：" }}
             <span
               class="address"
-              v-clipboard:copy="message"
+              v-clipboard:copy="message1"
               v-clipboard:success="onCopy"
             >
               TSPUcs5X1wxGf7q9ni6TBtpA9ZyvKQyVga
@@ -53,7 +53,7 @@
             <br />
             <span
               class="address"
-              v-clipboard:copy="message"
+              v-clipboard:copy="message2"
               v-clipboard:success="onCopy"
             >
               TTxwHsrDARP1cCzkYssXhDHGJEk3DueihS
@@ -167,7 +167,8 @@ export default {
       titleFixed: false,
       i18n: "cn",
       publicPath: process.env.BASE_URL,
-      message: "TSPUcs5X1wxGf7q9ni6TBtpA9ZyvKQyVga"
+      message1: "TSPUcs5X1wxGf7q9ni6TBtpA9ZyvKQyVga",
+      message2: "TTxwHsrDARP1cCzkYssXhDHGJEk3DueihS"
     };
   },
   activated() {
@@ -175,11 +176,15 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
   },
   methods: {
-    onCopy() {
+    onCopy(msg) {
       this.$toasted
-        .show(this.i18n === "cn" ? "复制成功！" : "Copy successfully！", {
-          className: "copy_success"
-        })
+        .show(
+          (this.i18n === "cn" ? "复制成功！" : "Copy successfully！") +
+            msg.text,
+          {
+            className: "copy_success"
+          }
+        )
         .goAway(1500);
     },
     //滚动监听，头部固定
