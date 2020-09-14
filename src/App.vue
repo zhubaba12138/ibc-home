@@ -9,135 +9,97 @@
               href="javascript:void(0)"
               class="i18n"
               v-on:click="changeLanguage"
-            >
-              {{ this.i18n === "cn" ? "中文" : "EN" }}
-            </a>
+            >{{ this.i18n === "cn" ? "中文" : "EN" }}</a>
             <div class="contract">
-              <a
-                href="https://t.me/joinchat/P3KX2BpkAxay1z5QvD3OiA"
-                target="_blank"
-              >
-                <svg-icon iconClass="telegram"> </svg-icon
-              ></a>
+              <a href="https://t.me/joinchat/P3KX2BpkAxay1z5QvD3OiA" target="_blank">
+                <svg-icon iconClass="telegram"></svg-icon>
+              </a>
               <a
                 href="https://twitter.com/michaelibtc/status/1304696849576599553?s=21"
                 target="_blank"
               >
-                <svg-icon iconClass="twitter"></svg-icon
-              ></a>
+                <svg-icon iconClass="twitter"></svg-icon>
+              </a>
             </div>
           </div>
         </div>
         <div class="containaer">
+          <div>
+            <svg viewBox="0 0 600 150">
+              <!-- Symbol -->
+              <symbol id="s-text">
+                <text text-anchor="middle" x="50%" y="50%" dy=".35em">IBT</text>
+              </symbol>
+
+              <!-- Duplicate symbols -->
+              <use xlink:href="#s-text" class="text-animate" />
+              <use xlink:href="#s-text" class="text-animate" />
+              <use xlink:href="#s-text" class="text-animate" />
+              <use xlink:href="#s-text" class="text-animate" />
+              <use xlink:href="#s-text" class="text-animate" />
+            </svg>
+          </div>
           <div class="t1">
             {{
-              this.i18n === "cn"
-                ? "IBT Token 私募活动火热进行中！5000TRX起投"
-                : "The private placement of IBT tokens is underway!Starting from 5000TRX"
+            this.i18n === "cn"
+            ? `IBT 项目团队感谢第一批私募者，我们不会让你们失望!
+            2020-09-15 20:00 (SGT) JustSwap 我们不见不散!`
+            : `The IBT project team thanks the first batch of private funders, we will not let you down!
+            2020-09-15 20:00 (SGT) JustSwap Let's see or leave!`
+            }}
+            {{
+            this.i18n === "cn"
+            ? `IBT正在发币中,如2020-09-15 20:00前未收到请联系客服`
+            : `
+            IBT is in the process of issuing coins, if you have not received it before 20:00 on 2020-09-15, please contact customer service`
             }}
             <br />
-            {{ this.i18n === "cn" ? "私募地址：" : "Cryptocurrency wallet：" }}
-            <span
-              class="address"
-              v-clipboard:copy="message1"
-              v-clipboard:success="onCopy"
-            >
-              TSPUcs5X1wxGf7q9ni6TBtpA9ZyvKQyVga
-            </span>
-            <br /><br />
+          </div>
+          <div class="t2">
             {{
-              this.i18n === "cn"
-                ? "因现有匿名社区投资本项目,项目团队特别开放专用私募通道: "
-                : "Due to the existing anonymous community investing in this project, the project team has opened a dedicated private equity channel: "
+            this.i18n === "cn"
+            ? "因现有匿名社区投资本项目,项目团队特别开放专用私募通道: "
+            : "Due to the existing anonymous community investing in this project, the project team has opened a dedicated private equity channel: "
             }}
             <br />
             <span
               class="address"
               v-clipboard:copy="message2"
               v-clipboard:success="onCopy"
-            >
-              TTxwHsrDARP1cCzkYssXhDHGJEk3DueihS
-            </span>
-          </div>
-          <div class="t2">
-            {{
-              this.i18n === "cn"
-                ? `IBT Token 是基于区块链的新型社会实验型代币。 它基于 Tron
-            发行，在其智能合约中，除常规功能外，还内嵌了交易燃烧、尾单博
-            弈、持币分红,子母币四种独特机制。`
-                : `IBT Token is a new type of social experimental token based on blockchain. It is based on Tron
-            Issuance, in its smart contract, in addition to regular functions, it also embeds transaction burning and tail order blogging
-            There are four unique mechanisms of game, holding currency dividends, and parent currency.`
-            }}<br />
-            {{
-              this.i18n === "cn"
-                ? `代币名称：IBT Token 代币符号：IBT`
-                : `Token name: IBT Token Token symbol: IBT`
-            }}<br />
-            {{
-              this.i18n === "cn"
-                ? `初始总量：100,000,000（交易燃烧会使代币总量持续减少）`
-                : `
-Initial total amount: 100,000,000 (trading burning will cause the total amount of tokens to continue to decrease)`
-            }}
-            {{
-              this.i18n === "cn"
-                ? `代币分配：无预挖、`
-                : `Token distribution: no pre-mining`
-            }}
+            >TTxwHsrDARP1cCzkYssXhDHGJEk3DueihS</span>
             <br />
             {{
-              this.i18n === "cn"
-                ? `团队无持币，所有代币投入资金池`
-                : `The team has no tokens, all tokens are invested in the fund pool`
-            }}<br />
-            {{ this.i18n === "cn" ? `代币类型：TRC-20` : `Token type: TRC-20`
-            }}<br />
-            {{
-              this.i18n === "cn"
-                ? `上线交易所：JustSwap`
-                : `Online exchange: JustSwap`
-            }}<br />
-            {{
-              this.i18n === "cn"
-                ? `私募价格：1TRX：5IBT, 软顶:3000000TRX，硬顶:5000000TRX，私募资金90%注入 AMM 交易所资金池，10%团队用于运营与开发。
+            this.i18n === "cn"
+            ? `私募价格：1TRX：5IBT, 私募资金90%注入 AMM 交易所资金池，10%团队用于运营与开发。
             `
-                : `Private placement price: 1TRX: 5IBT, soft cap: 3000000TRX, hard cap: 5000000TRX, 90% of private equity funds are injected into the AMM exchange fund pool, 10% of the team is used for operation and development`
-            }}<br />
-            <br />
-            {{
-              this.i18n === "cn"
-                ? `上线时间：2020 年 9 月 15 日 20:00`
-                : `Online time: 20:00, September 15, 2020`
+            : `Private placement price: 1TRX: 5IBT, 90% of private equity funds are injected into the AMM exchange fund pool, 10% of the team is used for operation and development`
             }}
             <br />
             <p>
               {{
-                this.i18n === "cn"
-                  ? `由于IBT项目受到海外投资的赞助,近期有大量假币上线JustSwap,请谨防上当受骗,本项目上线后官网会公布合约地址`
-                  : "Since the IBT project is sponsored by overseas investment, a large number of counterfeit currencies have recently been launched on JustSwap. Please beware of being deceived. The official website will announce the contract address after the project is launched."
+              this.i18n === "cn"
+              ? `由于IBT项目受到海外投资的赞助,近期有大量假币上线JustSwap,请谨防上当受骗,本项目上线后官网会公布合约地址`
+              : "Since the IBT project is sponsored by overseas investment, a large number of counterfeit currencies have recently been launched on JustSwap. Please beware of being deceived. The official website will announce the contract address after the project is launched."
               }}
             </p>
             <p />
           </div>
           <div class="r3">
             <a :href="`${publicPath}IBT_whitepaper_cn.pdf`" target="_blank">
-              <button>
-                {{ this.i18n === "cn" ? "白皮书" : "White Paper" }}
-              </button>
+              <button>{{ this.i18n === "cn" ? "白皮书" : "White Paper" }}</button>
             </a>
           </div>
         </div>
-        <span class="countdown">{{
+        <span class="countdown">
+          {{
           this.i18n === "cn" ? "私募倒计时" : "Countdown"
-        }}</span>
+          }}
+        </span>
         <div id="clock"></div>
       </div>
     </div>
     <div class="investors">
-      <div class="page_title">
-        {{ this.i18n === "cn" ? "合作机构" : "INVESTORS" }}
-      </div>
+      <div class="page_title">{{ this.i18n === "cn" ? "合作机构" : "INVESTORS" }}</div>
       <div class="investors_list">
         <img src="./assets/c1.png" />
         <img src="./assets/c2.png" />
@@ -151,7 +113,7 @@ Initial total amount: 100,000,000 (trading burning will cause the total amount o
     </div>
     <footer>
       <div class="footer-r2"></div>
-      <div class="copyright">© 2020 ibt-blockchain.com</div>
+      <div class="copyright">© 2020 IBT-TOKEN</div>
     </footer>
   </div>
 </template>
@@ -200,7 +162,7 @@ export default {
   mounted() {
     this.titleFixed = false;
     window.addEventListener("scroll", this.handleScroll);
-    const timeDiff = moment(moment("2020-09-14 22:00:00")).diff(new Date());
+    const timeDiff = moment(moment("2020-09-15 12:00:00")).diff(new Date());
     var deadline = new Date(Date.parse(new Date()) + timeDiff);
     let clockdDom = new Clock(new Date(deadline), function() {});
     let clockBox = document.querySelector("#clock");
@@ -210,6 +172,110 @@ export default {
 </script>
 
 <style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
+.box-with-text {
+  background-image: url("http://skipthepie.org/nutrition-photos/o/18958_130419356684071.jpg");
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.box-with-text {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-20%) translateY(-20%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  background-repeat: repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+  white-space: nowrap;
+  text-align: center;
+  text-transform: uppercase;
+  font: 16vmax/0.85 Open Sans, Impact;
+}
+
+.text {
+  font: 10.5em/1 Open Sans, Impact;
+  text-transform: uppercase;
+}
+
+.simple {
+  fill: url(#gr-simple);
+}
+
+.radial {
+  fill: url(#gr-radial);
+}
+
+/* Colorize pattern */
+.g-spots circle:nth-child(5n + 1) {
+  fill: #1d4259;
+}
+.g-spots circle:nth-child(5n + 2) {
+  fill: #0a7373;
+}
+.g-spots circle:nth-child(5n + 3) {
+  fill: #30bf7c;
+}
+.g-spots circle:nth-child(5n + 4) {
+  fill: #baf266;
+}
+.g-spots circle:nth-child(5n + 5) {
+  fill: #eef272;
+}
+
+.text-pattern {
+  fill: url(#p-spots);
+  stroke: #1d4259;
+  stroke-width: 5;
+  stroke-opacity: 0.5;
+  font: 10.5em/1 Open Sans, Impact;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.text-animate {
+  font: 10.5em/1 Open Sans, Impact;
+  text-transform: uppercase;
+  margin: 0;
+  fill: none;
+  stroke-width: 6;
+  stroke-linejoin: round;
+  stroke-dasharray: 70 330;
+  stroke-dashoffset: 0;
+  animation: stroke 6s infinite linear;
+}
+
+.text-animate:nth-child(5n + 1) {
+  stroke: rgb(29, 161, 242);
+  animation-delay: -1.2s;
+}
+
+.text-animate:nth-child(5n + 2) {
+  stroke: #f5a503;
+  animation-delay: -2.4s;
+}
+
+.text-animate:nth-child(5n + 3) {
+  stroke: #e9f1df;
+  animation-delay: -3.6s;
+}
+
+.text:nth-child(5n + 4) {
+  stroke: #56d9cd;
+  animation-delay: -4.8s;
+}
+
+.text-animate:nth-child(5n + 5) {
+  stroke: #3aa1bf;
+  animation-delay: -6s;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: -400;
+  }
+}
 html,
 body {
   padding: 0;
@@ -258,10 +324,9 @@ li {
 .top .bg {
   padding-top: 76px;
   padding-bottom: 135px;
-  background: rgba(0, 63, 96, 0.6);
 }
 .top .sticky-placeholder {
-  height: 103px;
+  /* height: 103px; */
   margin-bottom: 32px;
 }
 .top .sticky {
@@ -343,11 +408,15 @@ li {
   height: 1.5rem;
 }
 .top .t1 {
-  font-size: 2.5vw;
+  font-size: 2vw;
   font-weight: 500;
   position: relative;
   margin-bottom: 33px;
   /* padding: 0 1rem; */
+}
+.t1 {
+  max-width: 80%;
+  margin: 0 auto;
 }
 .top .t2 {
   font-size: 1.8vw;
