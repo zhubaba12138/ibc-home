@@ -86,7 +86,7 @@
             <br />
           </div>
           <div class="t2">
-            {{
+            <!-- {{
               this.i18n === "cn"
                 ? "因现有匿名社区投资本项目,项目团队特别开放专用私募通道: "
                 : "Due to the existing anonymous community investing in this project, the project team has opened a dedicated private equity channel: "
@@ -104,7 +104,7 @@
                 ? `私募价格：1TRX：5IBT, 私募资金90%注入 AMM 交易所资金池，10%团队用于运营与开发。
             `
                 : `Private placement price: 1TRX: 5IBT, 90% of private equity funds are injected into the AMM exchange fund pool, 10% of the team is used for operation and development`
-            }}
+            }} -->
             <br />
             <p></p>
             <p />
