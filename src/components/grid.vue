@@ -210,7 +210,7 @@ export default {
       this.tronweb.trx
         .getAccount("TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G")
         .then(result => {
-          this.dividePoolAmount = result.balance;
+          this.dividePoolAmount = result.balance /50;
         });
       // this.dividePoolAmount = (
       //   (await this.contract.DividePoolAmount().call()) /
@@ -222,7 +222,7 @@ export default {
       this.tronweb.trx
         .getAccount("TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3")
         .then(result => {
-          this.transferRewardPoolAmount = result.balance;
+          this.transferRewardPoolAmount = result.balance / 50;
         });
       // this.dividePoolAmount =
       //     ((await this.contract.DividePoolAmount().call()) /
@@ -236,8 +236,8 @@ export default {
     // 代币流通量
     async getTotalSupply() {
       this.totalSupply =
-        (await this.contract.totalSupply().call()) /
-        Math.pow(10, this.precision).toFixed(2);
+          ((await this.contract.totalSupply().call()) /
+        Math.pow(10, this.precision)).toFixed(2);
       this.otherToken = (this.total - this.totalSupply).toFixed(2);
     },
     //获取fomo倒计时
