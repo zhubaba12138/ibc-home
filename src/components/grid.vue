@@ -24,12 +24,16 @@
         <span>{{ this.i18n === "cn" ? "分红池" : "Dividend Pool" }}</span>
       </div>
       <div class="grid-list-item">
-         <p>{{divideCount}}</p>
-        <span>{{ this.i18n === "cn" ? "可分红地址数" : "Dividend Addresses" }}</span>
+        <p>{{ divideCount }}</p>
+        <span>{{
+          this.i18n === "cn" ? "可分红地址数" : "Dividend Addresses"
+        }}</span>
       </div>
       <div class="grid-list-item">
-         <p>{{ ( dividePoolAmount / divideCount ).toFixed(2) }}</p>
-        <span>{{ this.i18n === "cn" ? "每个地址预计分红" : "Dividend for each address" }}</span>
+        <p>{{ (dividePoolAmount / divideCount).toFixed(2) }}</p>
+        <span>{{
+          this.i18n === "cn" ? "每个地址预计分红" : "Dividend for each address"
+        }}</span>
       </div>
       <div class="grid-list-item">
         <p>{{ transferRewardPoolAmount }}</p>
@@ -42,15 +46,19 @@
         }}</span>
       </div>
       <div class="grid-list-item">
-        <p>{{ this.fomoTimer }}{{this.i18n === "cn"?"秒":"S"}}</p>
+        <p>{{ this.fomoTimer }}{{ this.i18n === "cn" ? "秒" : "S" }}</p>
         <span>{{
           this.i18n === "cn" ? "FOMO发奖倒计时" : "Minimum IBT quantity limit"
         }}</span>
       </div>
     </div>
     <div class="fomo_title">
-      <span class="title_address">{{this.i18n === "cn" ?"FOMO奖励名单":"FOMO Reward Address"}}</span>
-      <span class="title_coin">{{this.i18n === "cn" ?"FOMO奖励代币":"FOMO Reward Preview"}}</span>
+      <span class="title_address">{{
+        this.i18n === "cn" ? "FOMO奖励名单" : "FOMO Reward Address"
+      }}</span>
+      <span class="title_coin">{{
+        this.i18n === "cn" ? "FOMO奖励代币" : "FOMO Reward Preview"
+      }}</span>
     </div>
     <transition-group name="insert" tag="ul" class="fomo_list">
       <li v-for="(i, key) in this.fomoList" :key="key">
@@ -94,7 +102,7 @@ export default {
   mounted() {
     setInterval(() => {
       this.fomoTimer = this.fomoTimer - 1;
-      if(this.fomoTimer < 1){
+      if (this.fomoTimer < 1) {
         this.fomoTimer = 480;
       }
     }, 1000);
@@ -170,28 +178,34 @@ export default {
     },
     //分红仓数
     getDividePoolNumber() {
-      let _this = this, index = 1;
+      let _this = this,
+        index = 1;
       get(index);
       function get(i) {
-        let start = (i - 1) * 40 ,limit = 40;
+        let start = (i - 1) * 40,
+          limit = 40;
         i++;
         axios
-            .get(`https://apilist.tronscan.org/api/token_trc20/holders?sort=-balance&start=${start}&limit=${limit}&contract_address=TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6`)
-            .then((response) => {
-              let list = response.data.trc20_tokens;
-              list.forEach(item => {
-                if(item.balance / Math.pow(10, _this.precision).toFixed(2) > 100000) {
-                  _this.divideCount ++ ;
-                }
-
-              });
-              if (list.length == 40) {
-                get(i)
+          .get(
+            `https://apilist.tronscan.org/api/token_trc20/holders?sort=-balance&start=${start}&limit=${limit}&contract_address=TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6`
+          )
+          .then(response => {
+            let list = response.data.trc20_tokens;
+            list.forEach(item => {
+              if (
+                item.balance / Math.pow(10, _this.precision).toFixed(2) >
+                100000
+              ) {
+                _this.divideCount++;
               }
-            })
-            .catch(function(error) {
-              console.log(error);
             });
+            if (list.length == 40) {
+              get(i);
+            }
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
       }
     },
     // 持仓数
@@ -212,10 +226,13 @@ export default {
     async getDividePoolAmount() {
       axios
         .get(
-            "https://apilist.tronscan.org/api/account?address=TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G"
+          "https://apilist.tronscan.org/api/account?address=TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G"
         )
         .then(response => {
-          this.dividePoolAmount = ((response.data.trc20token_balances[0].balance) /  Math.pow(10, this.precision)).toFixed(2);
+          this.dividePoolAmount = (
+            response.data.trc20token_balances[0].balance /
+            Math.pow(10, this.precision)
+          ).toFixed(2);
           return response.data;
         })
         .catch(function(error) {
@@ -229,14 +246,19 @@ export default {
     // 交易奖池金额
     async getTransferRewardPoolAmount() {
       axios
-        .get("https://apilist.tronscan.org/api/account?address=TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3")
-            .then(response => {
-              this.transferRewardPoolAmount = ((response.data.trc20token_balances[0].balance) /  Math.pow(10, this.precision)).toFixed(2);
-              return response.data;
-            })
-            .catch(function(error) {
-              console.log(error);
-            });
+        .get(
+          "https://apilist.tronscan.org/api/account?address=TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3"
+        )
+        .then(response => {
+          this.transferRewardPoolAmount = (
+            response.data.trc20token_balances[0].balance /
+            Math.pow(10, this.precision)
+          ).toFixed(2);
+          return response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
       // this.dividePoolAmount =
       //     ((await this.contract.DividePoolAmount().call()) /
       //         Math.pow(10, this.precision)).toFixed(2);
@@ -247,9 +269,10 @@ export default {
     },
     // 代币流通量
     async getTotalSupply() {
-      this.totalSupply =
-          ((await this.contract.totalSupply().call()) /
-        Math.pow(10, this.precision)).toFixed(2);
+      this.totalSupply = (
+        (await this.contract.totalSupply().call()) /
+        Math.pow(10, this.precision)
+      ).toFixed(2);
       this.otherToken = (this.total - this.totalSupply).toFixed(2);
     },
     //获取fomo倒计时
@@ -260,13 +283,26 @@ export default {
     },
     //获取中奖地址
     async getFomoAddress() {
-      axios.get("/api/fomoList")
-          .then(res => {
-        this.fomoList = res.data;
-      }).catch((error) => {
-        this.fomoList = [{"address":"TLcvhQ92GokYpgjV85hT9xGg6fg61jkWQP","amount":"7658"},{"address":"TEgC9ZruxdraWhtCJWd7hEWkreuitYjc3b","amount":"7658"},{"address":"TUbx4HW1cr6tMEUFHSjNSSid8DdNkMbFXD","amount":"7658"},{"address":"TFLuGjPKRCniysTABLEjarJeNvQKoZMNJo","amount":"7658"},{"address":"TC7DiyhEhmssSJeer9UvpArpSwWdHxbJ8a","amount":"7658"}]
-        console.log(error)
-      });
+      axios
+        .get("/api/fomoList")
+        .then(res => {
+          this.fomoList = res.data;
+        })
+        .catch(error => {
+          this.fomoList = [
+            { address: "TLcvhQ92GokYpgjV85hT9xGg6fg61jkWQP", amount: "7658" },
+            { address: "TEgC9ZruxdraWhtCJWd7hEWkreuitYjc3b", amount: "7658" },
+            { address: "TUbx4HW1cr6tMEUFHSjNSSid8DdNkMbFXD", amount: "7658" },
+            { address: "TFLuGjPKRCniysTABLEjarJeNvQKoZMNJo", amount: "7658" },
+            { address: "TC7DiyhEhmssSJeer9UvpArpSwWdHxbJ8a", amount: "7658" },
+            { address: "TYW9QQsstYdjZ2VuBbPSJFvt32Dyufqdqo", amount: "7658" },
+            { address: "TAbbr4TmhtMimFGGH1Y3JAVLY6psxfKh89", amount: "9526" },
+            { address: "TD5yA6XCX9nUBpx2vHSGcJ4KFAwYeRBpV8", amount: "9526" },
+            { address: "TUHsHC7GDcBYWgbvTCUJkpC5DUMiZciJz2", amount: "9526" },
+            { address: "TKsjf6pa4w3LDPjtKm6QmbCfSzFfUUyhfC", amount: "9526" }
+          ];
+          console.log(error);
+        });
     }
   }
 };
