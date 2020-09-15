@@ -125,6 +125,7 @@
         <!-- <div id="clock"></div> -->
       </div>
     </div>
+   <Grid :i18n="i18n"></Grid>
     <div class="investors">
       <div class="page_title">
         {{ this.i18n === "cn" ? "合作机构" : "INVESTORS" }}
@@ -153,6 +154,9 @@
 import "./clock.less";
 export default {
   name: "App",
+  components: {
+    Grid
+  },
   data() {
     return {
       titleFixed: false,

@@ -22,5 +22,15 @@ module.exports = {
     const imagesRule = config.module.rule("images");
     imagesRule.exclude.add(resolve("src/icons"));
     config.module.rule("images").test(/\.(png|jpe?g|gif|svg)(\?.*)?$/);
+  },
+  devServer: {
+    proxy: {
+      "/api": {
+        target: 'http://45.77.79.147:3000',//服务器
+        // target: "http://192.168.0.28:3000",
+        ws: true,
+        changeOrigin: true
+      }
+    }
   }
 };
