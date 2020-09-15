@@ -407,13 +407,13 @@ li {
   }
   .top .sticky svg {
     color: rgb(102, 153, 255);
-    width: 1rem !important;
-    height: 1rem !important;
+    width: .8rem !important;
+    height: .8rem !important;
   }
   .top .i18n {
-    width: 1rem !important;
-    height: 1rem !important;
-    line-height: 1rem;
+    width: .8rem !important;
+    height: .8rem !important;
+    line-height: .8rem !important;
     background: #1a98a8;
     color: #fff;
     position: absolute;
