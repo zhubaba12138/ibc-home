@@ -3,10 +3,10 @@
     <div class="title">{{ this.i18n === "cn" ? "数据面板" : "Data" }}</div>
     <div class="chart" ref="chart"></div>
     <div class="grid-list">
-      <div class="grid-list-item">
+      <!-- <div class="grid-list-item">
         <p>{{ totalSupply }}</p>
         <span>{{ this.i18n === "cn" ? "流通代币" : "Destroyed" }}</span>
-      </div>
+      </div> -->
       <div class="grid-list-item">
         <p>{{ otherToken }}</p>
         <span>{{ this.i18n === "cn" ? "已销毁代币" : "Data" }}</span>
@@ -15,10 +15,10 @@
         <p>{{ tokenHolderCount }}</p>
         <span>{{ this.i18n === "cn" ? "持币地址数" : "Total Address" }}</span>
       </div>
-      <div class="grid-list-item">
+      <!-- <div class="grid-list-item">
         <p>{{ burnRate }}</p>
         <span>{{ this.i18n === "cn" ? "当前燃烧率" : "Burn Rate" }}</span>
-      </div>
+      </div> -->
       <div class="grid-list-item">
         <p>{{ dividePoolAmount }}</p>
         <span>{{ this.i18n === "cn" ? "分红池" : "Dividend Pool" }}</span>
@@ -311,7 +311,7 @@ export default {
 }
 .grid .grid-list {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   -moz-column-gap: 20px;
   column-gap: 20px;
   row-gap: 15px;
