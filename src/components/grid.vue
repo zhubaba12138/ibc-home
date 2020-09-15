@@ -16,7 +16,7 @@
         <span>{{ this.i18n === "cn" ? "已销毁代币" : "Data" }}</span>
       </div>
       <div class="grid-list-item">
-         <p>{{ tokenHolderCount }}</p>
+        <p>{{ tokenHolderCount }}</p>
         <span>{{ this.i18n === "cn" ? "持币地址数" : "Total Address" }}</span>
       </div>
       <div class="grid-list-item">
@@ -28,12 +28,16 @@
         <span>{{ this.i18n === "cn" ? "分红池" : "Dividend Pool" }}</span>
       </div>
       <div class="grid-list-item">
-         <p>78</p>
-        <span>{{ this.i18n === "cn" ? "可分红地址数" : "Dividend Addresses" }}</span>
+        <p>78</p>
+        <span>{{
+          this.i18n === "cn" ? "可分红地址数" : "Dividend Addresses"
+        }}</span>
       </div>
       <div class="grid-list-item">
-         <p>{{ ( dividePoolAmount / 78 ).toFixed(2) }}</p>
-        <span>{{ this.i18n === "cn" ? "每个地址预计分红" : "Dividend for each address" }}</span>
+        <p>{{ (dividePoolAmount / 78).toFixed(2) }}</p>
+        <span>{{
+          this.i18n === "cn" ? "每个地址预计分红" : "Dividend for each address"
+        }}</span>
       </div>
       <div class="grid-list-item">
         <p>{{ transferRewardPoolAmount }}</p>
@@ -45,19 +49,21 @@
           this.i18n === "cn" ? "参与最低代币限制" : "Minimum IBT quantity limit"
         }}</span>
       </div>
+      <div class="grid-list-item">
+        <p>{{ this.fomoTimer }}{{this.i18n === "cn"?"秒":"S"}}</p>
+        <span>{{
+          this.i18n === "cn" ? "FOMO发奖倒计时" : "Minimum IBT quantity limit"
+        }}</span>
+      </div>
     </div>
     <div class="fomo_title">
-      <span class="title_address">FOMO奖励名单</span>
-      <span class="title_coin">FOMO奖励代币</span>
+      <span class="title_address">{{this.i18n === "cn" ?"FOMO奖励名单":"FOMO Reward Address"}}</span>
+      <span class="title_coin">{{this.i18n === "cn" ?"FOMO奖励代币":"FOMO Reward Preview"}}</span>
     </div>
     <transition-group name="insert" tag="ul" class="fomo_list">
-      <li
-        v-for="(i, key) in this.fomoList"
-        :key="i.address"
-        v-bind:style="{ animationDelay: `${key + 0.2}s` }"
-      >
+      <li v-for="(i, key) in this.fomoList" :key="key">
         <span class="winer_address">{{ i.address }}</span>
-        <span class="winer_money">{{ i.value }}</span>
+        <span class="winer_money">{{ i.amount }}</span>
       </li>
     </transition-group>
   </div>
@@ -94,6 +100,9 @@ export default {
   },
   props: ["i18n"],
   mounted() {
+    setInterval(() => {
+      this.fomoTimer = this.fomoTimer - 1;
+    }, 1000);
     const HttpProvider = TronWeb.providers.HttpProvider;
     const fullNode = new HttpProvider("https://api.trongrid.io");
     const solidityNode = new HttpProvider("https://api.trongrid.io");
@@ -148,7 +157,6 @@ export default {
       // this.getBurnRate();
       this.getDividePoolNumber();
       this.getTotalSupply();
-      this.getCurrentBlock();
       this.getFomoAddress();
     },
     async login() {
@@ -163,11 +171,16 @@ export default {
       setInterval(() => {
         this.init();
       }, 10000);
+      setInterval(() => {
+        this.getFomoCountDown();
+      }, 60000);
     },
     getDividePoolNumber() {
       axios
-        .get("https://apilist.tronscan.org/api/token_trc20/holders?sort=-balance&start=0&limit=20&contract_address=TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6")
-        .then((response) => {
+        .get(
+          "https://apilist.tronscan.org/api/token_trc20/holders?sort=-balance&start=0&limit=20&contract_address=TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6"
+        )
+        .then(response => {
           this.tokenHolderCount = response.data.total;
         })
         .catch(function(error) {
@@ -177,10 +190,10 @@ export default {
     // 分红池金额
     async getDividePoolAmount() {
       this.tronweb.trx
-          .getAccount("TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G")
-          .then(result => {
-            this.dividePoolAmount = result.balance;
-          });
+        .getAccount("TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G")
+        .then(result => {
+          this.dividePoolAmount = result.balance;
+        });
       // this.dividePoolAmount = (
       //   (await this.contract.DividePoolAmount().call()) /
       //   Math.pow(10, this.precision)
@@ -189,10 +202,10 @@ export default {
     // 交易奖池金额
     async getTransferRewardPoolAmount() {
       this.tronweb.trx
-          .getAccount("TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3")
-          .then(result => {
-            this.transferRewardPoolAmount = result.balance;
-          });
+        .getAccount("TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3")
+        .then(result => {
+          this.transferRewardPoolAmount = result.balance;
+        });
       // this.dividePoolAmount =
       //     ((await this.contract.DividePoolAmount().call()) /
       //         Math.pow(10, this.precision)).toFixed(2);
@@ -209,30 +222,16 @@ export default {
         Math.pow(10, this.precision);
       this.otherToken = (this.total - this.totalSupply).toFixed(2);
     },
-    //获取最新交易信息
-    async getCurrentBlock() {
-      axios
-        .get(
-          "https://apilist.tronscan.org/api/token_trc20/transfers?limit=20&start=0&contract_address=TNrXTDu4pX24G18PBdn3jfrtVeb4jrkCTY"
-        )
-        .then(res => {
-          this.transactions = res.data.token_transfers;
-          this.transactions.forEach(k => {
-            if (k.from_address === "f") {
-              if (k.block_ts) {
-                this.fomoTimer = 480;
-              }else{
-                console.log(k.to_address)
-              }
-            }
-          });
-        });
-      console.log(this.transactions);
+    //获取fomo倒计时
+    async getFomoCountDown() {
+      axios.get("/api/ibtFomoCountDown ").then(res => {
+        this.fomoTimer = res.data.countdown;
+      });
     },
     //获取中奖地址
     async getFomoAddress() {
       axios.get("/api/fomoList").then(res => {
-        this.fomoList = res.data.list;
+        this.fomoList = res.data;
       });
     }
   }
@@ -300,7 +299,7 @@ export default {
   display: inline-block;
   font-size: 16px;
   text-align: center;
-  color: #0085db;
+  color: #1a98a8;
   margin-left: 20px;
 }
 @media screen and (max-width: 600px) {
@@ -321,6 +320,9 @@ export default {
     color: #0085db;
     margin-left: 15px;
   }
+  .fomo_list .winer_address {
+    font-size: 0.18rem;
+  }
 }
 .fomo_title,
 .fomo_list {
@@ -333,6 +335,11 @@ export default {
   padding-bottom: 80px;
   max-width: 1200px;
   margin: auto;
+}
+.fomo_list {
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 20px;
 }
 .fomo_title {
   background: #1a98a8;
@@ -354,16 +361,16 @@ export default {
   display: inline-block;
 }
 .fomo_list li {
-  position: absolute;
-  top: 0;
-  left: 0;
+  // position: absolute;
+  // top: 0;
+  // left: 0;
   width: 100%;
   margin-bottom: 5px;
   padding: 20px 0;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(black, 0.2);
-  animation: enlist 5s linear infinite;
+  // animation: enlist 20s linear infinite;
   border-top: 0;
 }
 @keyframes enlist {
