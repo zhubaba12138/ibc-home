@@ -79,13 +79,13 @@
               </div> -->
             </a>
             <br/><br/><br/>
-            <a
+            <!-- <a
               class="ibt-btn"
               :href="`${publicPath}IBT_whitepaper_${this.i18n}.pdf`"
               target="_blank"
             >
               {{ this.i18n === "cn" ? "白皮书" : "White Paper" }}
-            </a>
+            </a> -->
             <!-- {{
               this.i18n === "cn"
                 ? `IBT 项目团队感谢第一批私募者，我们不会让你们失望!
