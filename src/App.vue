@@ -118,7 +118,10 @@
             <p />
           </div>
           <div class="r3">
-            <a :href="`${publicPath}IBT_whitepaper_cn.pdf`" target="_blank">
+            <a
+              :href="`${publicPath}IBT_whitepaper_${this.i18n}.pdf`"
+              target="_blank"
+            >
               <button>
                 {{ this.i18n === "cn" ? "白皮书" : "White Paper" }}
               </button>
@@ -133,7 +136,7 @@
         <!-- <div id="clock"></div> -->
       </div>
     </div>
-   <Grid :i18n="i18n"></Grid>
+    <Grid :i18n="i18n"></Grid>
     <div class="investors">
       <div class="page_title">
         {{ this.i18n === "cn" ? "合作机构" : "INVESTORS" }}
@@ -159,7 +162,7 @@
 <script>
 // import { Clock } from "./clock.js";
 // import moment from "moment";
-import Grid from './components/grid'
+import Grid from "./components/grid";
 import "./clock.less";
 export default {
   name: "App",
@@ -406,13 +409,13 @@ li {
   }
   .top .sticky svg {
     color: rgb(102, 153, 255);
-    width: .8rem !important;
-    height: .8rem !important;
+    width: 0.8rem !important;
+    height: 0.8rem !important;
   }
   .top .i18n {
-    width: .8rem !important;
-    height: .8rem !important;
-    line-height: .8rem !important;
+    width: 0.8rem !important;
+    height: 0.8rem !important;
+    line-height: 0.8rem !important;
     background: #1a98a8;
     color: #fff;
     position: absolute;
