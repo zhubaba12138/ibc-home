@@ -28,11 +28,11 @@
         <span>{{ this.i18n === "cn" ? "分红池" : "Dividend Pool" }}</span>
       </div>
       <div class="grid-list-item">
-         <p>78</p>
+         <p>{{divideCount}}</p>
         <span>{{ this.i18n === "cn" ? "可分红地址数" : "Dividend Addresses" }}</span>
       </div>
       <div class="grid-list-item">
-         <p>{{ ( dividePoolAmount / 78 ).toFixed(2) }}</p>
+         <p>{{ ( dividePoolAmount / divideCount ).toFixed(2) }}</p>
         <span>{{ this.i18n === "cn" ? "每个地址预计分红" : "Dividend for each address" }}</span>
       </div>
       <div class="grid-list-item">
@@ -40,7 +40,7 @@
         <span>{{ this.i18n === "cn" ? "大奖池" : "Prize Pool" }}</span>
       </div>
       <div class="grid-list-item">
-        <p>6000IBT</p>
+        <p>50000IBT</p>
         <span>{{
           this.i18n === "cn" ? "参与最低代币限制" : "Minimum IBT quantity limit"
         }}</span>
@@ -85,8 +85,8 @@ export default {
       transferRewardAmountLimit: "-",
       divideRewardAmountLimit: "-",
       divideReward: "-",
-      divideUserCount: "-",
-      divideCount: "-",
+      divideUserCount: 0,
+      divideCount: 0,
       transactions: {},
       fomoList: [],
       fomoTimer: 480
@@ -144,6 +144,7 @@ export default {
   methods: {
     init() {
       this.getDividePoolAmount();
+      this.getHolderPoolNumber();
       this.getTransferRewardPoolAmount();
       // this.getBurnRate();
       this.getDividePoolNumber();
@@ -162,13 +163,41 @@ export default {
       this.init();
       setInterval(() => {
         this.init();
-      }, 10000);
+      }, 300000);
     },
+    //分红仓数
     getDividePoolNumber() {
+      let _this = this, index = 1;
+      get(index);
+      function get(i) {
+        let start = (i - 1) * 40 ,limit = 40;
+        i++;
+        axios
+            .get(`https://apilist.tronscan.org/api/token_trc20/holders?sort=-balance&start=${start}&limit=${limit}&contract_address=TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6`)
+            .then((response) => {
+              let list = response.data.trc20_tokens;
+              list.forEach(item => {
+                if(item.balance / Math.pow(10, _this.precision).toFixed(2) > 100000) {
+                  _this.divideCount ++ ;
+                }
+
+              });
+              if (list.length == 40) {
+                get(i)
+              }
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
+      }
+    },
+    // 持仓数
+    getHolderPoolNumber() {
       axios
         .get("https://apilist.tronscan.org/api/token_trc20/holders?sort=-balance&start=0&limit=20&contract_address=TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6")
         .then((response) => {
           this.tokenHolderCount = response.data.total;
+          return response.data;
         })
         .catch(function(error) {
           console.log(error);
@@ -179,7 +208,7 @@ export default {
       this.tronweb.trx
           .getAccount("TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G")
           .then(result => {
-            this.dividePoolAmount = result.balance;
+            this.dividePoolAmount = result.balance ;
           });
       // this.dividePoolAmount = (
       //   (await this.contract.DividePoolAmount().call()) /
@@ -206,7 +235,7 @@ export default {
     async getTotalSupply() {
       this.totalSupply =
         (await this.contract.totalSupply().call()) /
-        Math.pow(10, this.precision);
+        Math.pow(10, this.precision).toFixed(2);
       this.otherToken = (this.total - this.totalSupply).toFixed(2);
     },
     //获取最新交易信息
