@@ -84,6 +84,15 @@
             IBT is in the process of issuing coins, if you have not received it before 20:00 on 2020-09-15, please contact customer service`
             }}
             <br />
+            <br />
+            {{
+              this.i18n === "cn"
+                ? `IBT Token 是基于区块链的新型社会实验型代币。 它基于 Tron 发行，在其智能合约中，除常规功能外，还内嵌了交易燃烧、尾单博 弈、持币分红,子母币四种独特机制。
+                代币名称：IBT Token 代币符号：IBT`
+                : `IBT Token is a new type of social experimental token based on blockchain. It is issued based on Tron. In addition to conventional functions, its smart contract also embeds four unique mechanisms: transaction burning, tail order game, currency holding dividends, and parent currency.
+                Token name: IBT Token Token symbol: IBT`
+            }}
+            <br />
           </div>
           <div class="t2">
             <!-- {{
@@ -151,6 +160,7 @@
 <script>
 // import { Clock } from "./clock.js";
 // import moment from "moment";
+import Grid from './components/grid'
 import "./clock.less";
 export default {
   name: "App",

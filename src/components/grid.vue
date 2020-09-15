@@ -24,7 +24,7 @@
         <span>{{ this.i18n === "cn" ? "当前燃烧率" : "Burn Rate" }}</span>
       </div>
       <div class="grid-list-item">
-        <p>{{ dividePoolAmount }}IBT</p>
+        <p>{{ dividePoolAmount }}</p>
         <span>{{ this.i18n === "cn" ? "分红池" : "Dividend Pool" }}</span>
       </div>
       <div class="grid-list-item">
@@ -40,9 +40,9 @@
         <span>{{ this.i18n === "cn" ? "大奖池" : "Prize Pool" }}</span>
       </div>
       <div class="grid-list-item">
-        <p>2</p>
+        <p>6000IBT</p>
         <span>{{
-          this.i18n === "cn" ? "发奖次数" : "Number of prizes issued"
+          this.i18n === "cn" ? "参与最低代币限制" : "Minimum IBT quantity limit"
         }}</span>
       </div>
     </div>
@@ -70,11 +70,11 @@ export default {
   name: "grid",
   data() {
     return {
-      investContract: "TNrXTDu4pX24G18PBdn3jfrtVeb4jrkCTY",
+      investContract: "TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6",
       contract: "",
       tronweb: "",
       address: "",
-      precision: 6,
+      precision: 8,
       total: 100000000,
       totalSupply: 0,
       otherToken: 100000000,
@@ -144,7 +144,7 @@ export default {
   methods: {
     init() {
       this.getDividePoolAmount();
-      // this.getTransferRewardPoolAmount();
+      this.getTransferRewardPoolAmount();
       // this.getBurnRate();
       this.getDividePoolNumber();
       this.getTotalSupply();
@@ -155,7 +155,7 @@ export default {
       // 实例化合约
       try {
         this.contract = await this.tronweb.contract().at(this.investContract);
-        await this.tronweb.setAddress("TNrXTDu4pX24G18PBdn3jfrtVeb4jrkCTY");
+        await this.tronweb.setAddress("TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6");
       } catch (e) {
         console.log(e);
       }
@@ -176,37 +176,27 @@ export default {
     },
     // 分红池金额
     async getDividePoolAmount() {
-      this.dividePoolAmount = (
-        (await this.contract.DividePoolAmount().call()) /
-        Math.pow(10, this.precision)
-      ).toFixed(2);
+      this.tronweb.trx
+          .getAccount("TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G")
+          .then(result => {
+            this.dividePoolAmount = result.balance;
+          });
+      // this.dividePoolAmount = (
+      //   (await this.contract.DividePoolAmount().call()) /
+      //   Math.pow(10, this.precision)
+      // ).toFixed(2);
     },
     // 交易奖池金额
     async getTransferRewardPoolAmount() {
-      this.transferRewardPoolAmount = (
-        (await this.contract.TransferRewardPoolAmount().call()) /
-        Math.pow(10, this.precision)
-      ).toFixed(2);
       this.tronweb.trx
-        .getAccount("TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G")
-        .then(result => {
-          this.dividePoolAmount = result.balance;
-        });
+          .getAccount("TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3")
+          .then(result => {
+            this.transferRewardPoolAmount = result.balance;
+          });
       // this.dividePoolAmount =
       //     ((await this.contract.DividePoolAmount().call()) /
       //         Math.pow(10, this.precision)).toFixed(2);
     },
-    // 交易奖池金额
-    // async getTransferRewardPoolAmount() {
-    //   this.tronweb.trx
-    //     .getAccount("TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3")
-    //     .then(result => {
-    //       this.transferRewardPoolAmount = result.balance;
-    //     });
-    // this.transferRewardPoolAmount =
-    //     ((await this.contract.TransferRewardPoolAmount().call()) /
-    //         Math.pow(10, this.precision)).toFixed(2);
-    // },
     // 当前燃烧率
     async getBurnRate() {
       this.burnRate = (await this.contract.getBurnRate().call()) + "%";
@@ -217,52 +207,7 @@ export default {
       this.totalSupply =
         (await this.contract.totalSupply().call()) /
         Math.pow(10, this.precision);
-      this.otherToken = (this.total - this.totalSupply).toFixed(3);
-
-      this.myChart.setOption({
-        series: [
-          {
-            name: "token",
-            data: [
-              {
-                value: this.totalSupply,
-                name: "流通代币",
-                itemStyle: { color: "#0EC8FF" }
-              },
-              {
-                value: this.total - this.totalSupply,
-                name: "已销毁代币",
-                itemStyle: { color: "#E500FF" }
-              }
-            ]
-          }
-        ]
-      });
-      (
-        (await this.contract.totalSupply().call()) /
-        Math.pow(10, this.precision)
-      ).toFixed(2);
       this.otherToken = (this.total - this.totalSupply).toFixed(2);
-
-      // this.myChart.setOption({
-      //   series: [
-      //     {
-      //       name: "token",
-      //       data: [
-      //         {
-      //           value: this.totalSupply,
-      //           name: '流通代币',
-      //           itemStyle: { color: "#0EC8FF" },
-      //         },
-      //         {
-      //           value: this.total - this.totalSupply,
-      //           name: '已销毁代币',
-      //           itemStyle: { color: "#E500FF" },
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // });
     },
     //获取最新交易信息
     async getCurrentBlock() {
@@ -273,7 +218,7 @@ export default {
         .then(res => {
           this.transactions = res.data.token_transfers;
           this.transactions.forEach(k => {
-            if (k.from_address === "TNrXTDu4pX24G18PBdn3jfrtVeb4jrkCTY") {
+            if (k.from_address === "f") {
               if (k.block_ts) {
                 this.fomoTimer = 480;
               }else{
