@@ -4,7 +4,7 @@
       <div class="bg">
         <div class="sticky-placeholder" ref="pride_tab_fixed">
           <div class="sticky" :class="titleFixed ? 'isFixed' : ''">
-            <svg-icon iconClass="btc"></svg-icon>
+            <img class="ibt-logo" src="./assets/ibt.png">
             <a
               href="javascript:void(0)"
               class="i18n"
@@ -371,6 +371,10 @@ li {
 .top .sticky-placeholder {
   /* height: 103px; */
   margin-bottom: 32px;
+}
+.top .ibt-logo{
+  width: 40px;
+  height: 40px;
 }
 .top .sticky {
   background: transparent;

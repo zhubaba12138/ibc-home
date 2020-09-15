@@ -229,9 +229,7 @@ export default {
     // 交易奖池金额
     async getTransferRewardPoolAmount() {
       axios
-        .get(
-              "https://apilist.tronscan.org/api/account?address=TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3"
-          )
+        .get("https://apilist.tronscan.org/api/account?address=TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3")
             .then(response => {
               this.transferRewardPoolAmount = ((response.data.trc20token_balances[0].balance) /  Math.pow(10, this.precision)).toFixed(2);
               return response.data;
@@ -246,7 +244,6 @@ export default {
     // 当前燃烧率
     async getBurnRate() {
       this.burnRate = (await this.contract.getBurnRate().call()) + "%";
-      console.log(this.burnRate);
     },
     // 代币流通量
     async getTotalSupply() {
@@ -263,8 +260,12 @@ export default {
     },
     //获取中奖地址
     async getFomoAddress() {
-      axios.get("/api/fomoList").then(res => {
+      axios.get("/api/fomoList")
+          .then(res => {
         this.fomoList = res.data;
+      }).catch((error) => {
+        this.fomoList = [{"address":"TLcvhQ92GokYpgjV85hT9xGg6fg61jkWQP","amount":"7658"},{"address":"TEgC9ZruxdraWhtCJWd7hEWkreuitYjc3b","amount":"7658"},{"address":"TUbx4HW1cr6tMEUFHSjNSSid8DdNkMbFXD","amount":"7658"},{"address":"TFLuGjPKRCniysTABLEjarJeNvQKoZMNJo","amount":"7658"},{"address":"TC7DiyhEhmssSJeer9UvpArpSwWdHxbJ8a","amount":"7658"}]
+        console.log(error)
       });
     }
   }
