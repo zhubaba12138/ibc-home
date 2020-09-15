@@ -4,10 +4,6 @@
     <div class="chart" ref="chart"></div>
     <div class="grid-list">
       <div class="grid-list-item">
-        <p>{{ total }}</p>
-        <span>{{ this.i18n === "cn" ? "初始发行量" : "Circulation" }}</span>
-      </div>
-      <div class="grid-list-item">
         <p>{{ totalSupply }}</p>
         <span>{{ this.i18n === "cn" ? "流通代币" : "Destroyed" }}</span>
       </div>
