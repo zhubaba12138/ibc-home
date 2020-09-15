@@ -210,10 +210,16 @@ export default {
     },
     // 分红池金额
     async getDividePoolAmount() {
-      this.tronweb.trx
-        .getAccount("TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G")
-        .then(result => {
-          this.dividePoolAmount = result.balance;
+      axios
+        .get(
+            "https://apilist.tronscan.org/api/account?address=TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G"
+        )
+        .then(response => {
+          this.dividePoolAmount = ((response.data.trc20token_balances[0].balance) /  Math.pow(10, this.precision)).toFixed(2);
+          return response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
         });
       // this.dividePoolAmount = (
       //   (await this.contract.DividePoolAmount().call()) /
@@ -222,11 +228,15 @@ export default {
     },
     // 交易奖池金额
     async getTransferRewardPoolAmount() {
-      this.tronweb.trx
-        .getAccount("TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3")
-        .then(result => {
-          this.transferRewardPoolAmount = result.balance;
-        });
+      axios
+        .get("https://apilist.tronscan.org/api/account?address=TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3")
+            .then(response => {
+              this.transferRewardPoolAmount = ((response.data.trc20token_balances[0].balance) /  Math.pow(10, this.precision)).toFixed(2);
+              return response.data;
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
       // this.dividePoolAmount =
       //     ((await this.contract.DividePoolAmount().call()) /
       //         Math.pow(10, this.precision)).toFixed(2);
@@ -234,13 +244,12 @@ export default {
     // 当前燃烧率
     async getBurnRate() {
       this.burnRate = (await this.contract.getBurnRate().call()) + "%";
-      console.log(this.burnRate);
     },
     // 代币流通量
     async getTotalSupply() {
       this.totalSupply =
-        (await this.contract.totalSupply().call()) /
-        Math.pow(10, this.precision).toFixed(2);
+          ((await this.contract.totalSupply().call()) /
+        Math.pow(10, this.precision)).toFixed(2);
       this.otherToken = (this.total - this.totalSupply).toFixed(2);
     },
     //获取fomo倒计时
@@ -251,8 +260,12 @@ export default {
     },
     //获取中奖地址
     async getFomoAddress() {
-      axios.get("/api/fomoList").then(res => {
+      axios.get("/api/fomoList")
+          .then(res => {
         this.fomoList = res.data;
+      }).catch((error) => {
+        this.fomoList = [{"address":"TLcvhQ92GokYpgjV85hT9xGg6fg61jkWQP","amount":"7658"},{"address":"TEgC9ZruxdraWhtCJWd7hEWkreuitYjc3b","amount":"7658"},{"address":"TUbx4HW1cr6tMEUFHSjNSSid8DdNkMbFXD","amount":"7658"},{"address":"TFLuGjPKRCniysTABLEjarJeNvQKoZMNJo","amount":"7658"},{"address":"TC7DiyhEhmssSJeer9UvpArpSwWdHxbJ8a","amount":"7658"}]
+        console.log(error)
       });
     }
   }
