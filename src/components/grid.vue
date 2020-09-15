@@ -94,6 +94,9 @@ export default {
   mounted() {
     setInterval(() => {
       this.fomoTimer = this.fomoTimer - 1;
+      if(this.fomoTimer < 1){
+        this.fomoTimer = 480;
+      }
     }, 1000);
     const HttpProvider = TronWeb.providers.HttpProvider;
     const fullNode = new HttpProvider("https://api.trongrid.io");

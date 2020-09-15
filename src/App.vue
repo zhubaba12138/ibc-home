@@ -56,7 +56,7 @@
             >
               TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6
             </p>
-            <br /><br />
+            <br />
             {{
               this.i18n === "cn"
                 ? "已上波宝钱包，请下载波宝钱包导入合约地址查看资产"
@@ -69,8 +69,7 @@
               </div> -->
             </a>
             <br />
-            <br />
-            {{
+            <!-- {{
               this.i18n === "cn"
                 ? `IBT 项目团队感谢第一批私募者，我们不会让你们失望!
             2020-09-15 20:00 (SGT) JustSwap 我们不见不散!`
@@ -82,7 +81,7 @@
                 ? `IBT正在发币中,如2020-09-15 20:00前未收到请联系客服`
                 : `
             IBT is in the process of issuing coins, if you have not received it before 20:00 on 2020-09-15, please contact customer service`
-            }}
+            }} -->
             <br />
             <br />
             {{
