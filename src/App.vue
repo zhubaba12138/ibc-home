@@ -9,7 +9,7 @@
               href="javascript:void(0)"
               class="i18n"
               v-on:click="changeLanguage"
-              >{{ this.i18n === "cn" ? "英文" : "CN" }}</a
+              >{{ this.i18n === "cn" ? "EN" : "CN" }}</a
             >
             <div class="contract">
               <a
@@ -62,8 +62,8 @@
                 ? "已上波宝钱包，请下载波宝钱包导入合约地址查看资产"
                 : "The Bobo Wallet has been uploaded, please download Bobo Wallet and import the contract address to view assets"
             }}<br />
-            <a class="download" href="https://www.tronlink.org" target="_blank"
-              >{{ this.i18n === "cn" ? "去下载" : "Download" }}
+            <a class="download" href="https://justswap.zendesk.com/hc/zh-cn/articles/360047260472-%E5%A6%82%E4%BD%95%E5%85%91%E6%8D%A2token-" target="_blank"
+              >{{ this.i18n === "cn" ? "去兑换" : "To exchange" }}
               <!-- <div>
                 <svg viewBox="0 0 24 24"></svg>
               </div> -->
@@ -469,11 +469,11 @@ li {
   margin: 0 auto;
 }
 .top .t2 {
-  font-size: 1.8vw;
+  /* font-size: 1.8vw;
   font-weight: 300;
   margin-bottom: 57px;
   padding: 0 20%;
-  text-align: left;
+  text-align: left; */
 }
 .top .r3 button {
   font-size: 22px;
