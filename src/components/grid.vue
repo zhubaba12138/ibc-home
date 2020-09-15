@@ -210,10 +210,16 @@ export default {
     },
     // 分红池金额
     async getDividePoolAmount() {
-      this.tronweb.trx
-        .getAccount("TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G")
-        .then(result => {
-          this.dividePoolAmount = result.balance /50;
+      axios
+        .get(
+            "https://apilist.tronscan.org/api/account?address=TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G"
+        )
+        .then(response => {
+          this.dividePoolAmount = ((response.data.trc20token_balances[0].balance) /  Math.pow(10, this.precision)).toFixed(2);
+          return response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
         });
       // this.dividePoolAmount = (
       //   (await this.contract.DividePoolAmount().call()) /
@@ -222,11 +228,17 @@ export default {
     },
     // 交易奖池金额
     async getTransferRewardPoolAmount() {
-      this.tronweb.trx
-        .getAccount("TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3")
-        .then(result => {
-          this.transferRewardPoolAmount = result.balance / 50;
-        });
+      axios
+        .get(
+              "https://apilist.tronscan.org/api/account?address=TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3"
+          )
+            .then(response => {
+              this.transferRewardPoolAmount = ((response.data.trc20token_balances[0].balance) /  Math.pow(10, this.precision)).toFixed(2);
+              return response.data;
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
       // this.dividePoolAmount =
       //     ((await this.contract.DividePoolAmount().call()) /
       //         Math.pow(10, this.precision)).toFixed(2);
