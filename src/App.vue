@@ -9,7 +9,7 @@
               href="javascript:void(0)"
               class="i18n"
               v-on:click="changeLanguage"
-              >{{ this.i18n === "cn" ? "中文" : "EN" }}</a
+              >{{ this.i18n === "cn" ? "英文" : "CN" }}</a
             >
             <div class="contract">
               <a
