@@ -56,19 +56,36 @@
             >
               TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6
             </p>
+            {{
+              this.i18n === "cn"
+                ? `IBT Token 是基于区块链的新型社会实验型代币。 它基于 Tron 发行，在其智能合约中，除常规功能外，还内嵌了交易燃烧、尾单博 弈、持币分红,子母币四种独特机制。
+                代币名称：IBT Token 代币符号：IBT`
+                : `IBT Token is a new type of social experimental token based on blockchain. It is issued based on Tron. In addition to conventional functions, its smart contract also embeds four unique mechanisms: transaction burning, tail order game, currency holding dividends, and parent currency.
+                Token name: IBT Token Token symbol: IBT`
+            }}
             <br />
             {{
               this.i18n === "cn"
                 ? "已上波宝钱包，请下载波宝钱包导入合约地址查看资产"
                 : "The Bobo Wallet has been uploaded, please download Bobo Wallet and import the contract address to view assets"
             }}<br />
-            <a class="download" href="https://justswap.zendesk.com/hc/zh-cn/articles/360047260472-%E5%A6%82%E4%BD%95%E5%85%91%E6%8D%A2token-" target="_blank"
+            <a
+              class="download"
+              href="https://justswap.zendesk.com/hc/zh-cn/articles/360047260472-%E5%A6%82%E4%BD%95%E5%85%91%E6%8D%A2token-"
+              target="_blank"
               >{{ this.i18n === "cn" ? "去兑换" : "To exchange" }}
               <!-- <div>
                 <svg viewBox="0 0 24 24"></svg>
               </div> -->
             </a>
-            <br />
+            <br/><br/><br/>
+            <a
+              class="ibt-btn"
+              :href="`${publicPath}IBT_whitepaper_${this.i18n}.pdf`"
+              target="_blank"
+            >
+              {{ this.i18n === "cn" ? "白皮书" : "White Paper" }}
+            </a>
             <!-- {{
               this.i18n === "cn"
                 ? `IBT 项目团队感谢第一批私募者，我们不会让你们失望!
@@ -82,16 +99,6 @@
                 : `
             IBT is in the process of issuing coins, if you have not received it before 20:00 on 2020-09-15, please contact customer service`
             }} -->
-            <br />
-            <br />
-            {{
-              this.i18n === "cn"
-                ? `IBT Token 是基于区块链的新型社会实验型代币。 它基于 Tron 发行，在其智能合约中，除常规功能外，还内嵌了交易燃烧、尾单博 弈、持币分红,子母币四种独特机制。
-                代币名称：IBT Token 代币符号：IBT`
-                : `IBT Token is a new type of social experimental token based on blockchain. It is issued based on Tron. In addition to conventional functions, its smart contract also embeds four unique mechanisms: transaction burning, tail order game, currency holding dividends, and parent currency.
-                Token name: IBT Token Token symbol: IBT`
-            }}
-            <br />
           </div>
           <div class="t2">
             <!-- {{
@@ -113,19 +120,7 @@
             `
                 : `Private placement price: 1TRX: 5IBT, 90% of private equity funds are injected into the AMM exchange fund pool, 10% of the team is used for operation and development`
             }} -->
-            <br />
-            <p></p>
             <p />
-          </div>
-          <div class="r3">
-            <a
-              :href="`${publicPath}IBT_whitepaper_${this.i18n}.pdf`"
-              target="_blank"
-            >
-              <button>
-                {{ this.i18n === "cn" ? "白皮书" : "White Paper" }}
-              </button>
-            </a>
           </div>
         </div>
         <!-- <span class="countdown">
@@ -167,7 +162,7 @@ import "./clock.less";
 export default {
   name: "App",
   components: {
-    Grid
+    Grid,
   },
   data() {
     return {
@@ -176,7 +171,7 @@ export default {
       publicPath: process.env.BASE_URL,
       message1: "TSPUcs5X1wxGf7q9ni6TBtpA9ZyvKQyVga",
       message2: "TTxwHsrDARP1cCzkYssXhDHGJEk3DueihS",
-      message3: "TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6"
+      message3: "TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6",
     };
   },
   activated() {
@@ -190,7 +185,7 @@ export default {
           (this.i18n === "cn" ? "复制成功！" : "Copy successfully！") +
             msg.text,
           {
-            className: "copy_success"
+            className: "copy_success",
           }
         )
         .goAway(1500);
@@ -203,7 +198,7 @@ export default {
     },
     changeLanguage() {
       this.i18n = this.i18n === "cn" ? "en" : "cn";
-    }
+    },
   },
   mounted() {
     this.titleFixed = false;
@@ -213,7 +208,7 @@ export default {
     // let clockdDom = new Clock(new Date(deadline), function() {});
     // let clockBox = document.querySelector("#clock");
     // clockBox.appendChild(clockdDom.el);
-  }
+  },
 };
 </script>
 
@@ -375,7 +370,7 @@ li {
   /* height: 103px; */
   margin-bottom: 32px;
 }
-.top .ibt-logo{
+.top .ibt-logo {
   width: 40px;
   height: 40px;
 }
@@ -475,7 +470,8 @@ li {
   padding: 0 20%;
   text-align: left; */
 }
-.top .r3 button {
+.ibt-btn {
+  text-decoration: none;
   font-size: 22px;
   font-weight: 300;
   color: #3e3e3e;
