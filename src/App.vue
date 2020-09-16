@@ -69,7 +69,7 @@
                 ? "已上波宝钱包，请下载波宝钱包导入合约地址查看资产"
                 : "The Bobo Wallet has been uploaded, please download Bobo Wallet and import the contract address to view assets"
             }}<br />
-            <p>为了回馈社区，促进大家的交易换手率，现推出购买抽奖活动，从20:00-21:00期间活动方案如下:<br>
+            <p>为了回馈社区，促进大家的交易换手率，现推出购买抽奖活动，从20:00-21:00期间活动方案如下:购买满10000IBT<br>
               奖励如下:<br>
               交易ID号码后5位尾数中带有1位8，奖励88 IBT代币<br>
               交易ID号码后5位尾数中带有2位，奖励888 IBT代币<br>
