@@ -290,17 +290,18 @@ export default {
         })
         .catch((error) => {
           this.fomoList = [
+            { address: "TNLYWeWUATDgtgnU5ojYEkEDxy1iuFxy93", amount: "9000" },
+            { address: "TAbbr4TmhtMimFGGH1Y3JAVLY6psxfKh89", amount: "9526" },
+            { address: "TD5yA6XCX9nUBpx2vHSGcJ4KFAwYeRBpV8", amount: "9526" },
+            { address: "TUHsHC7GDcBYWgbvTCUJkpC5DUMiZciJz2", amount: "9526" },
+            { address: "TKsjf6pa4w3LDPjtKm6QmbCfSzFfUUyhfC", amount: "9526" },
+            { address: "TCqaCdpTsh9TV3Gj5eq3wmQsmedA62nJej", amount: "9526" },
             { address: "TLcvhQ92GokYpgjV85hT9xGg6fg61jkWQP", amount: "7658" },
             { address: "TEgC9ZruxdraWhtCJWd7hEWkreuitYjc3b", amount: "7658" },
             { address: "TUbx4HW1cr6tMEUFHSjNSSid8DdNkMbFXD", amount: "7658" },
             { address: "TFLuGjPKRCniysTABLEjarJeNvQKoZMNJo", amount: "7658" },
             { address: "TC7DiyhEhmssSJeer9UvpArpSwWdHxbJ8a", amount: "7658" },
             { address: "TYW9QQsstYdjZ2VuBbPSJFvt32Dyufqdqo", amount: "7658" },
-            { address: "TAbbr4TmhtMimFGGH1Y3JAVLY6psxfKh89", amount: "9526" },
-            { address: "TD5yA6XCX9nUBpx2vHSGcJ4KFAwYeRBpV8", amount: "9526" },
-            { address: "TUHsHC7GDcBYWgbvTCUJkpC5DUMiZciJz2", amount: "9526" },
-            { address: "TKsjf6pa4w3LDPjtKm6QmbCfSzFfUUyhfC", amount: "9526" },
-            { address: "TCqaCdpTsh9TV3Gj5eq3wmQsmedA62nJej", amount: "9526" },
           ];
           console.log(error);
         });
