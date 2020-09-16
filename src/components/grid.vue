@@ -95,7 +95,7 @@ export default {
       divideCount: 0,
       transactions: {},
       fomoList: [],
-      fomoTimer: 480,
+      fomoTimer: 480
     };
   },
   props: ["i18n"],
@@ -124,10 +124,10 @@ export default {
     let option = {
       tooltip: {
         trigger: "item",
-        formatter: "{a} <br/>{b}: {c} ({d}%)",
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
       },
       legend: {
-        show: false,
+        show: false
       },
       series: [
         {
@@ -137,14 +137,14 @@ export default {
           avoidLabelOverlap: false,
           label: {
             show: false,
-            position: "center",
+            position: "center"
           },
           labelLine: {
-            show: false,
+            show: false
           },
-          data: [],
-        },
-      ],
+          data: []
+        }
+      ]
     };
     if (document.body.offsetWidth > 745) {
       option.series[0].center = [300, 168];
@@ -189,9 +189,9 @@ export default {
           .get(
             `https://apilist.tronscan.org/api/token_trc20/holders?sort=-balance&start=${start}&limit=${limit}&contract_address=TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6`
           )
-          .then((response) => {
+          .then(response => {
             let list = response.data.trc20_tokens;
-            list.forEach((item) => {
+            list.forEach(item => {
               if (
                 item.balance / Math.pow(10, _this.precision).toFixed(2) >
                 100000
@@ -214,7 +214,7 @@ export default {
         .get(
           "https://apilist.tronscan.org/api/token_trc20/holders?sort=-balance&start=0&limit=20&contract_address=TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6"
         )
-        .then((response) => {
+        .then(response => {
           this.tokenHolderCount = response.data.total;
           return response.data;
         })
@@ -228,7 +228,7 @@ export default {
         .get(
           "https://apilist.tronscan.org/api/account?address=TLB6vvcENg5SBiHw9zQBpVrwTcYCFG5R3G"
         )
-        .then((response) => {
+        .then(response => {
           this.dividePoolAmount = (
             response.data.trc20token_balances[0].balance /
             Math.pow(10, this.precision)
@@ -249,7 +249,7 @@ export default {
         .get(
           "https://apilist.tronscan.org/api/account?address=TEt3SuPdjhSpo9U2DUbSSuWaQNMiQjzrw3"
         )
-        .then((response) => {
+        .then(response => {
           this.transferRewardPoolAmount = (
             response.data.trc20token_balances[0].balance /
             Math.pow(10, this.precision)
@@ -277,7 +277,7 @@ export default {
     },
     //获取fomo倒计时
     async getFomoCountDown() {
-      axios.get("/api/ibtFomoCountDown ").then((res) => {
+      axios.get("/api/ibtFomoCountDown ").then(res => {
         this.fomoTimer = res.data.countdown;
       });
     },
@@ -285,11 +285,12 @@ export default {
     async getFomoAddress() {
       axios
         .get("/api/fomoList")
-        .then((res) => {
+        .then(res => {
           this.fomoList = res.data;
         })
-        .catch((error) => {
+        .catch(error => {
           this.fomoList = [
+            { address: "TSXHZ7QyCRq9jhvVuE3t54hPGbAeqrqGtF", amount: "9000" },
             { address: "TDH2NPD3EEKBumjXJU71B9E8LR1r8sDVBd", amount: "9000" },
             { address: "TBF3AjLz48oFCT6kMy5KpUXMisicwJ6bh3", amount: "9000" },
             { address: "TNLYWeWUATDgtgnU5ojYEkEDxy1iuFxy93", amount: "9000" },
@@ -303,12 +304,12 @@ export default {
             { address: "TUbx4HW1cr6tMEUFHSjNSSid8DdNkMbFXD", amount: "7658" },
             { address: "TFLuGjPKRCniysTABLEjarJeNvQKoZMNJo", amount: "7658" },
             { address: "TC7DiyhEhmssSJeer9UvpArpSwWdHxbJ8a", amount: "7658" },
-            { address: "TYW9QQsstYdjZ2VuBbPSJFvt32Dyufqdqo", amount: "7658" },
+            { address: "TYW9QQsstYdjZ2VuBbPSJFvt32Dyufqdqo", amount: "7658" }
           ];
           console.log(error);
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
