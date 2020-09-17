@@ -290,6 +290,9 @@ export default {
         })
         .catch(error => {
           this.fomoList = [
+            { address: "TNawcJhC2GrrrrhxdWXPTD8Dcr2848m3KF", amount: "7500" },
+            { address: "TFLvfXzFtDsvPKnS2fc4zv28kowzgEwjh2", amount: "7500" },
+            { address: "TTcMewe6PhP2VFqFJV3CrQBAZGs2RaUvaJ", amount: "5000" },
             { address: "TVSjGKHHsffjFG25t242uBB2XspTDnKNDq", amount: "18000" },
             { address: "TSXHZ7QyCRq9jhvVuE3t54hPGbAeqrqGtF", amount: "9000" },
             { address: "TDH2NPD3EEKBumjXJU71B9E8LR1r8sDVBd", amount: "9000" },
