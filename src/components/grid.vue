@@ -290,6 +290,12 @@ export default {
         })
         .catch(error => {
           this.fomoList = [
+            { address: "TTcMewe6PhP2VFqFJV3CrQBAZGs2RaUvaJ", amount: "5000" },
+            { address: "TNawcJhC2GrrrrhxdWXPTD8Dcr2848m3KF", amount: "7500" },
+            { address: "TFLvfXzFtDsvPKnS2fc4zv28kowzgEwjh2", amount: "7500" },
+            { address: "TZ8g6UvUpvPwQuaDRu1nbxbvcfCaCYwq5e", amount: "9420" },
+            { address: "TEyBVdYwSnMvG13sj9vP1BEec6Wc7HRQvE", amount: "9420" },
+            { address: "TJsJM3v1TaFGY6FE1RKHKyDzFz1tAT5gS7", amount: "9420" },
             { address: "TVSjGKHHsffjFG25t242uBB2XspTDnKNDq", amount: "18000" },
             { address: "TSXHZ7QyCRq9jhvVuE3t54hPGbAeqrqGtF", amount: "9000" },
             { address: "TDH2NPD3EEKBumjXJU71B9E8LR1r8sDVBd", amount: "9000" },
@@ -416,6 +422,8 @@ export default {
   padding-left: 0;
   padding-right: 0;
   padding-top: 20px;
+  max-height: 600px;
+  overflow: auto;
 }
 .fomo_title {
   background: #1a98a8;
