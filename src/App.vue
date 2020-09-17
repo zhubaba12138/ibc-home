@@ -146,7 +146,6 @@
         <img src="./assets/c2.png" />
         <img src="./assets/c3.png" />
         <img src="./assets/c4.png" />
-        <img src="./assets/c5.png" />
         <img src="./assets/c6.png" />
         <img src="./assets/c7.png" />
         <img src="./assets/c8.png" />
