@@ -28,22 +28,7 @@
           </div>
         </div>
         <div class="containaer">
-          <div id="canvas"></div>
-          <div>
-            <svg viewBox="0 0 600 150">
-              <!-- Symbol -->
-              <symbol id="s-text">
-                <text text-anchor="middle" x="50%" y="50%" dy=".35em">IBT</text>
-              </symbol>
-
-              <!-- Duplicate symbols -->
-              <use xlink:href="#s-text" class="text-animate" />
-              <use xlink:href="#s-text" class="text-animate" />
-              <use xlink:href="#s-text" class="text-animate" />
-              <use xlink:href="#s-text" class="text-animate" />
-              <use xlink:href="#s-text" class="text-animate" />
-            </svg>
-          </div>
+          <!-- <div id="canvas"></div> -->
           <div class="t1">
             {{
               `${
@@ -215,7 +200,7 @@ export default {
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.autoClear = false;
         renderer.setClearColor(0x000000, 0.0);
-        document.getElementById("canvas").appendChild(renderer.domElement);
+        // document.getElementById("canvas").appendChild(renderer.domElement);
 
         scene = new window.THREE.Scene();
 
@@ -498,7 +483,7 @@ li {
   background-image: url(./assets/bg.jpg);
   background-position: center;
   background-size: cover;
-  color: #000;
+  color: #fff;
   text-align: center;
   /* height: 100vh; */
 }
