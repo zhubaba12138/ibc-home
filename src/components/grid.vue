@@ -53,6 +53,7 @@
       </div>
     </div>
     <div class="fomo_title">
+      <span class="title_num">#</span>
       <span class="title_address">{{
         this.i18n === "cn" ? "FOMO奖励名单" : "FOMO Reward Address"
       }}</span>
@@ -62,6 +63,7 @@
     </div>
     <transition-group name="insert" tag="ul" class="fomo_list">
       <li v-for="(i, key) in this.fomoList" :key="key">
+        <span class="num">{{ `#${key + 1}` }}</span>
         <span class="winer_address">{{ i.address }}</span>
         <span class="winer_money">{{ i.amount }}</span>
       </li>
@@ -290,6 +292,7 @@ export default {
         })
         .catch(error => {
           this.fomoList = [
+            { address: "TAFHH63MtDfRxrxJPTwDhgbjFb1pEghxs1", amount: "5800" },
             { address: "TL2P1HAj5ZoFpeo1mn1QZYswpR1RC5bv2t", amount: "6280" },
             { address: "TTcMewe6PhP2VFqFJV3CrQBAZGs2RaUvaJ", amount: "5000" },
             { address: "TNawcJhC2GrrrrhxdWXPTD8Dcr2848m3KF", amount: "7500" },
@@ -432,10 +435,17 @@ export default {
 }
 .fomo_title .title_address,
 .winer_address {
-  width: 70%;
+  width: 60%;
   text-align: center;
   display: inline-block;
 }
+.fomo_title .title_num,
+.num {
+  width: 10%;
+  text-align: left;
+  display: inline-block;
+}
+
 .fomo_title .title_coin,
 .winer_money {
   width: 30%;
@@ -448,7 +458,7 @@ export default {
   // left: 0;
   width: 100%;
   margin-bottom: 5px;
-  padding: 20px 0;
+  padding: 20px;
   background: #fff;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(black, 0.2);
