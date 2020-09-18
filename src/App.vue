@@ -65,16 +65,29 @@
             }}
             <br />
             <p style="text-align:left;">
-              由于玩家期待IBT项目挖矿,项目组加快研发速度。IBTC挖矿已经完成测试阶段.  <br />
-              现推出子币空投活动 IBTC子币计划 IBTC发行量:100000000  <br />
-              团队持有:10000000，两年解锁  <br />
-              空投数量:10000000，剩余代币，通过燃烧数值投放  <br />
-              9.19号12:00进行快根据活跃地址进行空投  <br />
-              活跃地址:快照前24小时没有转出记录 具体投放比例如下:  <br />
-              1，持有10000以及10000以下IBT Token， 分配比例为10:1  <br />
-              2，持有10000以上-50000 IBT Token 分配比例为5:1 3，持有50000-150000  <br />
-              IBT Token 分配比例为2:1 4，持有200000-350000 IBT Token  <br />
-              分配比例为1:1  <br />
+               {{
+              this.i18n === "cn"?"由于玩家期待IBT项目挖矿,项目组加快研发速度。IBTC挖矿已经完成测试阶段.":"As players look forward to mining the IBT project, the project team speeds up research and development. IBTC mining has completed the testing phase."}}
+              <br />
+                 {{
+              this.i18n === "cn"?"现推出子币空投活动 IBTC子币计划 IBTC发行量:100000000":"Now launching the sub-coin airdrop event IBTC sub-coin plan IBTC circulation: 100000000"}} <br />
+                 {{
+              this.i18n === "cn"?"团队持有:10000000，两年解锁":"Team holding: 10,000,000, unlocked in two years"}} <br />
+                 {{
+              this.i18n === "cn"?"空投数量:10000000，剩余代币，通过燃烧数值投放 ":"Number of airdrops: 10000000, the remaining tokens will be injected by burning value"}}<br />
+                 {{
+              this.i18n === "cn"?"9.19号12:00进行快根据活跃地址进行空投 ":"9.19, 12:00, airdrop according to active address"}}<br />
+                 {{
+              this.i18n === "cn"?"活跃地址:快照前24小时没有转出记录 具体投放比例如下:":"Active address: There is no transfer record 24 hours before the snapshot. The specific delivery ratio is as follows:"}} <br />
+                 {{
+              this.i18n === "cn"?"1，持有10000以及10000以下IBT Token， 分配比例为10:1 ":"1. Holding 10,000 and below IBT Token, the distribution ratio is 10:1"}}<br />
+                 {{
+              this.i18n === "cn"?"2，持有10000以上-50000 IBT Token 分配比例为5:1 ":"2. The distribution ratio of holding more than 10,000 to 50,000 IBT Token is 5:1"}}<br />
+                 {{
+              this.i18n === "cn"?"3，持有50000-150000 ":"3. Hold 50000-150000"}}<br />
+                 {{
+              this.i18n === "cn"?"IBT Token 分配比例为2:1 4，持有200000-350000 IBT Token ":"The distribution ratio of IBT Token is 2:1 4. Holds 200,000-350000 IBT Token"}}<br />
+                 {{
+              this.i18n === "cn"?"分配比例为1:1 ":"The distribution ratio is 1:1"}}<br />
             </p>
             <br />
             <a
@@ -169,7 +182,7 @@ import "./clock.less";
 export default {
   name: "App",
   components: {
-    Grid,
+    Grid
   },
   data() {
     return {
@@ -178,7 +191,7 @@ export default {
       publicPath: process.env.BASE_URL,
       message1: "TSPUcs5X1wxGf7q9ni6TBtpA9ZyvKQyVga",
       message2: "TTxwHsrDARP1cCzkYssXhDHGJEk3DueihS",
-      message3: "TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6",
+      message3: "TWSuK6c6h9NrnXZEHLrnu8DHaDv1kNFgf6"
     };
   },
   activated() {
@@ -192,7 +205,7 @@ export default {
           (this.i18n === "cn" ? "复制成功！" : "Copy successfully！") +
             msg.text,
           {
-            className: "copy_success",
+            className: "copy_success"
           }
         )
         .goAway(1500);
@@ -205,7 +218,7 @@ export default {
     },
     changeLanguage() {
       this.i18n = this.i18n === "cn" ? "en" : "cn";
-    },
+    }
   },
   mounted() {
     this.titleFixed = false;
@@ -215,7 +228,7 @@ export default {
     // let clockdDom = new Clock(new Date(deadline), function() {});
     // let clockBox = document.querySelector("#clock");
     // clockBox.appendChild(clockdDom.el);
-  },
+  }
 };
 </script>
 
