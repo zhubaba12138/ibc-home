@@ -28,6 +28,7 @@
           </div>
         </div>
         <div class="containaer">
+          <div id="canvas"></div>
           <div>
             <svg viewBox="0 0 600 150">
               <!-- Symbol -->
@@ -65,6 +66,7 @@
             }}
             <br />
             <p style="text-align:left;">
+<<<<<<< HEAD
                {{
               this.i18n === "cn"?"由于玩家期待IBT项目挖矿,项目组加快研发速度。IBTC挖矿已经完成测试阶段.":"As players look forward to mining the IBT project, the project team speeds up research and development. IBTC mining has completed the testing phase."}}
               <br />
@@ -88,6 +90,20 @@
               this.i18n === "cn"?"IBT Token 分配比例为2:1 4，持有200000-350000 IBT Token ":"The distribution ratio of IBT Token is 2:1 4. Holds 200,000-350000 IBT Token"}}<br />
                  {{
               this.i18n === "cn"?"分配比例为1:1 ":"The distribution ratio is 1:1"}}<br />
+=======
+              由于玩家期待IBT项目挖矿,项目组加快研发速度。IBTC挖矿已经完成测试阶段.
+              <br />
+              现推出子币空投活动 IBTC子币计划 IBTC发行量:100000000 <br />
+              团队持有:10000000，两年解锁 <br />
+              空投数量:10000000，剩余代币，通过燃烧数值投放 <br />
+              9.19号12:00进行快根据活跃地址进行空投 <br />
+              活跃地址:快照前24小时没有转出记录 具体投放比例如下: <br />
+              1，持有10000以及10000以下IBT Token， 分配比例为10:1 <br />
+              2，持有10000以上-50000 IBT Token 分配比例为5:1 3，持有50000-150000
+              <br />
+              IBT Token 分配比例为2:1 4，持有200000-350000 IBT Token <br />
+              分配比例为1:1 <br />
+>>>>>>> 42595290525b1931462b86a0a563c7dc6305b914
             </p>
             <br />
             <a
@@ -199,6 +215,121 @@ export default {
     window.addEventListener("scroll", this.handleScroll);
   },
   methods: {
+    ani() {
+      var renderer, scene, camera, circle, skelet, particle;
+      window.onload = function() {
+        init();
+        animate();
+      };
+
+      function init() {
+        renderer = new window.THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setPixelRatio(
+          window.devicePixelRatio ? window.devicePixelRatio : 1
+        );
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.autoClear = false;
+        renderer.setClearColor(0x000000, 0.0);
+        document.getElementById("canvas").appendChild(renderer.domElement);
+
+        scene = new window.THREE.Scene();
+
+        camera = new window.THREE.PerspectiveCamera(
+          75,
+          window.innerWidth / window.innerHeight,
+          1,
+          1000
+        );
+        camera.position.z = 400;
+        scene.add(camera);
+
+        circle = new window.THREE.Object3D();
+        skelet = new window.THREE.Object3D();
+        particle = new window.THREE.Object3D();
+
+        scene.add(circle);
+        scene.add(skelet);
+        scene.add(particle);
+
+        var geometry = new window.THREE.TetrahedronGeometry(2, 0);
+        var geom = new window.THREE.IcosahedronGeometry(7, 1);
+        var geom2 = new window.THREE.IcosahedronGeometry(15, 1);
+
+        var material = new window.THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          shading: window.THREE.FlatShading,
+        });
+
+        for (var i = 0; i < 1000; i++) {
+          var mesh = new window.THREE.Mesh(geometry, material);
+          mesh.position
+            .set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5)
+            .normalize();
+          mesh.position.multiplyScalar(90 + Math.random() * 700);
+          mesh.rotation.set(
+            Math.random() * 2,
+            Math.random() * 2,
+            Math.random() * 2
+          );
+          particle.add(mesh);
+        }
+
+        var mat = new window.THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          shading: window.THREE.FlatShading,
+        });
+
+        var mat2 = new window.THREE.MeshPhongMaterial({
+          color: 0xffffff,
+          wireframe: true,
+          side: window.THREE.DoubleSide,
+        });
+
+        var planet = new window.THREE.Mesh(geom, mat);
+        planet.scale.x = planet.scale.y = planet.scale.z = 16;
+        circle.add(planet);
+
+        var planet2 = new window.THREE.Mesh(geom2, mat2);
+        planet2.scale.x = planet2.scale.y = planet2.scale.z = 10;
+        skelet.add(planet2);
+
+        var ambientLight = new window.THREE.AmbientLight(0x999999);
+        scene.add(ambientLight);
+
+        var lights = [];
+        lights[0] = new window.THREE.DirectionalLight(0xffffff, 1);
+        lights[0].position.set(1, 0, 0);
+        lights[1] = new window.THREE.DirectionalLight(0x11e8bb, 1);
+        lights[1].position.set(0.75, 1, 0.5);
+        lights[2] = new window.THREE.DirectionalLight(0x8200c9, 1);
+        lights[2].position.set(-0.75, -1, 0.5);
+        scene.add(lights[0]);
+        scene.add(lights[1]);
+        scene.add(lights[2]);
+
+        window.addEventListener("resize", onWindowResize, false);
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        particle.rotation.x += 0.0;
+        particle.rotation.y -= 0.004;
+        circle.rotation.x -= 0.002;
+        circle.rotation.y -= 0.003;
+        skelet.rotation.x -= 0.001;
+        skelet.rotation.y += 0.002;
+        renderer.clear();
+
+        renderer.render(scene, camera);
+      }
+    },
     onCopy(msg) {
       this.$toasted
         .show(
@@ -223,6 +354,7 @@ export default {
   mounted() {
     this.titleFixed = false;
     window.addEventListener("scroll", this.handleScroll);
+    this.ani();
     // const timeDiff = moment(moment("2020-09-15 12:00:00")).diff(new Date());
     // var deadline = new Date(Date.parse(new Date()) + timeDiff);
     // let clockdDom = new Clock(new Date(deadline), function() {});
@@ -234,6 +366,28 @@ export default {
 
 <style>
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
+#canvas{
+    background: #11e8bb; /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #11e8bb 0%,
+    #8200c9 100%
+  ); /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #11e8bb 0%,
+    #8200c9 100%
+  ); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #11e8bb 0%,
+    #8200c9 100%
+  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#11e8bb', endColorstr='#8200c9',GradientType=0 ); /* IE6-9 */
+  position:fixed;
+  z-index: 0;
+  top: 0;
+}
 .box-with-text {
   background-image: url("http://skipthepie.org/nutrition-photos/o/18958_130419356684071.jpg");
   -webkit-text-fill-color: transparent;
@@ -359,7 +513,7 @@ li {
   background-image: url(./assets/bg.jpg);
   background-position: center;
   background-size: cover;
-  color: #fff;
+  color: #000;
   text-align: center;
   /* height: 100vh; */
 }
