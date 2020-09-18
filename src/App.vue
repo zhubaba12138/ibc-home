@@ -148,7 +148,7 @@
     </div>
     <footer>
       <div class="footer-r2"></div>
-      <div class="copyright">© 2020 IBT-TOKEN</div>
+      <div class="copyright">© 2020 ibtofficial01@gmail.com</div>
     </footer>
   </div>
 </template>
