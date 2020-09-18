@@ -64,11 +64,19 @@
                 Token name: IBT Token Token symbol: IBT`
             }}
             <br />
-            {{
-              this.i18n === "cn"
-                ? "已上波宝钱包，请下载波宝钱包导入合约地址查看资产"
-                : "The Bobo Wallet has been uploaded, please download Bobo Wallet and import the contract address to view assets"
-            }}<br />
+            <p style="text-align:left;">
+              由于玩家期待IBT项目挖矿,项目组加快研发速度。IBTC挖矿已经完成测试阶段.  <br />
+              现推出子币空投活动 IBTC子币计划 IBTC发行量:100000000  <br />
+              团队持有:10000000，两年解锁  <br />
+              空投数量:10000000，剩余代币，通过燃烧数值投放  <br />
+              9.19号12:00进行快根据活跃地址进行空投  <br />
+              活跃地址:快照前24小时没有转出记录 具体投放比例如下:  <br />
+              1，持有10000以及10000以下IBT Token， 分配比例为10:1  <br />
+              2，持有10000以上-50000 IBT Token 分配比例为5:1 3，持有50000-150000  <br />
+              IBT Token 分配比例为2:1 4，持有200000-350000 IBT Token  <br />
+              分配比例为1:1  <br />
+            </p>
+            <br />
             <a
               class="download"
               href="https://justswap.zendesk.com/hc/zh-cn/articles/360047260472-%E5%A6%82%E4%BD%95%E5%85%91%E6%8D%A2token-"
@@ -78,7 +86,7 @@
                 <svg viewBox="0 0 24 24"></svg>
               </div> -->
             </a>
-            <br/><br/><br/>
+            <br /><br /><br />
             <a
               class="ibt-btn"
               :href="`${publicPath}IBT_whitepaper_${this.i18n}.pdf`"
