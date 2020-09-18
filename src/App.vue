@@ -66,7 +66,6 @@
             }}
             <br />
             <p style="text-align:left;">
-<<<<<<< HEAD
                {{
               this.i18n === "cn"?"由于玩家期待IBT项目挖矿,项目组加快研发速度。IBTC挖矿已经完成测试阶段.":"As players look forward to mining the IBT project, the project team speeds up research and development. IBTC mining has completed the testing phase."}}
               <br />
@@ -90,20 +89,6 @@
               this.i18n === "cn"?"IBT Token 分配比例为2:1 4，持有200000-350000 IBT Token ":"The distribution ratio of IBT Token is 2:1 4. Holds 200,000-350000 IBT Token"}}<br />
                  {{
               this.i18n === "cn"?"分配比例为1:1 ":"The distribution ratio is 1:1"}}<br />
-=======
-              由于玩家期待IBT项目挖矿,项目组加快研发速度。IBTC挖矿已经完成测试阶段.
-              <br />
-              现推出子币空投活动 IBTC子币计划 IBTC发行量:100000000 <br />
-              团队持有:10000000，两年解锁 <br />
-              空投数量:10000000，剩余代币，通过燃烧数值投放 <br />
-              9.19号12:00进行快根据活跃地址进行空投 <br />
-              活跃地址:快照前24小时没有转出记录 具体投放比例如下: <br />
-              1，持有10000以及10000以下IBT Token， 分配比例为10:1 <br />
-              2，持有10000以上-50000 IBT Token 分配比例为5:1 3，持有50000-150000
-              <br />
-              IBT Token 分配比例为2:1 4，持有200000-350000 IBT Token <br />
-              分配比例为1:1 <br />
->>>>>>> 42595290525b1931462b86a0a563c7dc6305b914
             </p>
             <br />
             <a
